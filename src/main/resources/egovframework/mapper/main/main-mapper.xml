@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.busan.smartvillage.main.mapper.MainMapper">
+
+    <select id="selectJobList" resultType="JobVO">
+        SELECT JOB_ID AS jobId
+            ,JOB_NM AS jobNm
+        FROM TJOB_INFORMATION
+        WHERE JOB_ID LIKE 'JOB0202%'
+    </select>
+
+   <select id="insertFile" parameterType="FileVO">
+        INSERT INTO tmanual_uld_file_hstry (
+                USER_ID
+               ,JOB_ID
+               ,ULD_FILE_GROUP_NUM
+               ,ULD_FILE_NUM
+               ,ORGNFL_NM
+               ,ORGNFL_SIZE
+               ,FILE_STRG_PATH
+               ,STRG_FILE_NM
+               ,DATA_PVSN_DT
+               ,UPDT_VER
+               ,UPDT_DT
+               ,IS_DELETE
+               ,DEL_DT
+               ,LOADDATE
+        )
+        VALUES
+            (
+                 #{userId}
+                ,#{jobId}
+                ,#{uldFileGroupNum}
+                ,#{uldFileNum}
+                ,#{orgnFileNm}
+                ,#{orgnFileSize}
+                ,#{filePath}
+                ,#{strgFileNm}
+                ,now()
+                ,#{updateVersion}
+                ,#{updateDt}
+                ,#{isDelete}
+                ,#{deleteDt}
+                ,now()
+             )
+    </select>
+
+    <select id="selectFileGroupNum" resultType="int">
+        SELECT COALESCE(MAX(ULD_FILE_GROUP_NUM), 0) AS uldFileGroupNum
+        FROM TMANUAL_ULD_FILE_HSTRY
+    </select>
+
+<!--    <select id="selectFileGroupNum" resultType="int">
+        SELECT ULD_FILE_GROUP_NUM AS uldFileGroupNum
+        FROM TMANUAL_ULD_FILE_HSTRY
+        ORDER BY ULD_FILE_GROUP_NUM DESC
+            LIMIT 1
+    </select>-->
+
+    <select id="selectFileList" resultType="FileVO">
+        SELECT ji.JOB_NM as jobNm
+             ,TO_CHAR(mufh.DATA_PVSN_DT, 'YYYY.MM.DD HH24:MI') as dataPvsnDt
+             ,avt.NICK_NM as nickNm
+             ,mufh.ORGNFL_NM as orgnFileNm
+             ,mufh.ULD_FILE_GROUP_NUM as uldFileGroupNum
+             ,mufh.ULD_FILE_NUM as uldFileNum
+             ,mufh.IS_DELETE AS isDelete
+        FROM
+            TMANUAL_ULD_FILE_HSTRY AS mufh
+                JOIN TJOB_INFORMATION AS ji
+                     ON mufh.JOB_ID = ji.JOB_ID
+                JOIN TUSER AS tuser
+                     ON mufh.USER_ID = tuser.USER_ID
+                JOIN TAVATAR AS avt
+                     ON tuser.AVATA_ID = avt.AVATA_ID
+        WHERE mufh.IS_DELETE = false
+        ORDER BY mufh.DATA_PVSN_DT DESC
+    </select>
+
+<!--  <delete id="deleteUploadFile" parameterType="FileVO">
+        DELETE FROM TMANUAL_ULD_FILE_HSTRY
+        WHERE ULD_FILE_GROUP_NUM = #{uldFileGroupNum} AND ULD_FILE_NUM = #{uldFileNum};
+    </delete>
+    -->
+    <!--삭제(db에서는 삭제아니고 is_delete=true로 수정 update)-->
+    <update id="deleteUploadFile" parameterType="FileVO">
+        UPDATE TMANUAL_ULD_FILE_HSTRY SET is_delete = TRUE ,del_dt = now()
+        WHERE ULD_FILE_GROUP_NUM =#{uldFileGroupNum} AND ULD_FILE_NUM = #{uldFileNum}
+    </update>
+
+    <!--수정-->
+    <update id="updateUploadFile" parameterType="FileVO">
+        UPDATE TMANUAL_ULD_FILE_HSTRY SET
+            ORGNFL_NM = #{orgnFileNm}
+            ,ORGNFL_SIZE = #{orgnFileSize}
+            ,FILE_STRG_PATH= #{filePath}
+            ,STRG_FILE_NM= #{strgFileNm}
+            ,UPDT_VER= #{updateVersion}
+            ,UPDT_DT= now()
+        WHERE ULD_FILE_GROUP_NUM =#{uldFileGroupNum} AND ULD_FILE_NUM = #{uldFileNum}
+    </update>
+
+    <select id="selectEditFile" parameterType="FileVO" resultType="FileVO">
+        SELECT
+            ji.JOB_ID as jobId,
+            mufh.UPDT_VER as updateVersion
+        FROM TMANUAL_ULD_FILE_HSTRY AS mufh
+                 JOIN TJOB_INFORMATION AS ji
+                      ON mufh.JOB_ID = ji.JOB_ID
+        WHERE mufh.ULD_FILE_GROUP_NUM = #{uldFileGroupNum} AND mufh.ULD_FILE_NUM = #{uldFileNum}
+    </select>
+
+    <!--파일 업로드 게시판 날짜별 목록 조회-->
+    <select id="selectDateFileList" parameterType="FileVO" resultType="FileVO">
+        SELECT ji.JOB_NM as jobNm
+             ,TO_CHAR(mufh.DATA_PVSN_DT, 'YYYY.MM.DD HH24:MI') as dataPvsnDt
+             ,avt.NICK_NM as nickNm
+             ,mufh.ORGNFL_NM as orgnFileNm
+             ,mufh.ULD_FILE_GROUP_NUM as uldFileGroupNum
+             ,mufh.ULD_FILE_NUM as uldFileNum
+             ,mufh.IS_DELETE AS isDelete
+        FROM
+            TMANUAL_ULD_FILE_HSTRY AS mufh
+                JOIN TJOB_INFORMATION AS ji
+                     ON mufh.JOB_ID = ji.JOB_ID
+                JOIN TUSER AS tuser
+                     ON mufh.USER_ID = tuser.USER_ID
+                JOIN TAVATAR AS avt
+                     ON tuser.AVATA_ID = avt.AVATA_ID
+        WHERE mufh.IS_DELETE = FALSE
+          AND TO_CHAR(DATA_PVSN_DT,'yyyy-mm-dd') BETWEEN #{startDate} AND #{endDate}
+        ORDER BY mufh.DATA_PVSN_DT DESC
+    </select>
+</mapper>

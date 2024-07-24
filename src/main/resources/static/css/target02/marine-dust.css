@@ -1,0 +1,883 @@
+
+@import "../../node_modules/ol-ext/dist/ol-ext.min.css";
+
+/* 변수 선언 */
+:root {
+}
+/* 변수 선언 끝 */
+
+/* 배경 이미지 */
+main {
+    background-image: url('../../images/target02/main.webp');
+}
+/* 배경 이미지 끝 */
+
+table {
+    border-collapse : collapse;
+}
+/* 주임님 코드 */
+.target-board {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 632px;
+    height: 975px;
+    z-index: 1;
+    background-color: #fff;
+    /*padding: 10px;*/
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateX(calc(100% - 762px)) scaleX(0);
+    transform-origin: top right;
+    opacity: 0;
+}
+
+.target-board.active {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateX(0) scaleX(1);
+    opacity: 1;
+}
+
+
+.target-board-text {
+    font-size: 26px;
+    font-weight: bold;
+    background: #f2f2f2;
+    height: 27px;
+    padding: 17px;
+}
+
+.target-board-text span {
+    font-size: 20px;
+    color: #595959;
+}
+
+.target-board-date {
+    position: absolute;
+    right: 20px;
+    top: 9px;
+}
+
+
+.dust-btn-div {
+    position: absolute;
+    top: 0;
+    right: 4px;
+    z-index: 1;
+    padding: 10px;
+    transition: transform 0.5s ease;
+    transform: translateX(1px);
+}
+
+.dust-btn-div.active {
+    transition: transform 0.5s ease;
+    transform: translateX(-775px);
+    right: -148px;
+}
+
+
+.dust-btn {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    width: 197px;
+    height: 37px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    color: #969696;
+}
+
+.dust-btn span {
+    position: absolute;
+    margin-left: 14px;
+    font-size: 17px;
+}
+
+
+.dust-btn img {
+    position: absolute;
+    left: 0;
+    margin-left: 8px;
+}
+
+.dust-btn:hover {
+    cursor: pointer;
+    background: #2f5597;
+    color: white;
+}
+
+.dust-btn.on {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dust-btn:focus {
+    background: #2f5597;
+    color: white;
+}
+
+.dust-board {
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    padding: 8px 10px 8px 10px;
+    width: 90%;
+    margin: 8px 16px 4px 32px;
+}
+.side-section-area .dust-board,
+.side-section-galmaet .dust-board{
+    margin: 1vh 16px 0.5vh 32px;
+}
+
+.dust-board-title span {
+    font-size: 20px;
+}
+
+.dust-board tr:first-child {
+    background: #f1e9e3;
+}
+
+.dust-board-content { /*내용*/
+    margin: 4px auto 0;
+    width: 546px;
+    text-align: center;
+}
+
+.dust-board-content th {
+    border: 1px solid #bfbfbf;
+}
+
+/* 갈맷길 표 */
+.galmaet-table {
+    margin: 9px auto 0;
+    width: 546px;
+}
+
+.galmaet-table th,
+.galmaet-table td {
+    border: 1px solid #bfbfbf;
+}
+
+.galmaet-table th{
+    background: #f1e9e3;
+}
+
+.galmaet-table td{
+    background: #ffffff;
+    padding-left: 12px
+}
+.galmaet-table tr:last-of-type{
+    height: 56px;
+}
+
+.galmaet-slider {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0 0 0;
+}
+
+.galmaet-slider img {
+    height: 34vh;
+    width: 542px;
+    border-radius: 4px;
+}
+
+.galmaet-slider span{
+    margin-top: 1vh;
+}
+
+.dust-board-01 {
+    text-align: center;
+}
+
+
+
+.dust-board-01 th:nth-child(1) {
+    width: 150px;
+}
+
+.dust-board-01 th:nth-child(2) {
+    width: 350px;
+}
+
+.dust-board-02 {
+    text-align: center;
+}
+
+.dust-board-02 img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.dust-board-02 span {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 22px;
+    margin-left: 6px;
+}
+
+
+.dust-board-02 tr:first-child {
+    height: 42px;
+}
+
+.dust-board-02 tr:last-child {
+    height: 60px;
+}
+
+.dust-board-03 th {
+    width: 83px;
+    height: 33px;
+    text-align: center;
+}
+
+.dust-board-03 th:first-child {
+    width: 62px;
+}
+
+.dust-board-04 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid #bfbfbf;
+    border-radius: 10px;
+    width: 168px;
+    height: 136px;
+}
+
+.dust-board-04 img{
+    height: 72px;
+    width: 72px;
+}
+
+.dust-board-04 span:first-child{
+    font-size: 20px;
+}
+.dust-board-04 span:last-child{
+     font-size: 20px;
+}
+
+#dust-next {
+    position: absolute;
+    right: 0px;
+    top: 46%;
+    display: inline-block;
+    border: none;
+    background: none;
+    z-index: 999;
+}
+
+#dust-next.on {
+    display: inline-block;
+}
+
+#dust-next:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#dust-next img {
+    left: 4px;
+}
+
+#dust-prev {
+    position: absolute;
+    left: -4px;
+    top: 49%;
+    display: inline-block;
+    border: none;
+    background: none;
+    z-index: 999999;
+}
+
+#dust-prev.on {
+    display: inline-block;
+}
+
+#dust-prev:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#dust-prev img {
+    bottom: 21px;
+}
+
+.vessel-board {
+    width: 220px;
+    text-align: center;
+    margin-top: 28px;
+}
+
+.vessel-board th {
+    border: 1px solid #bfbfbf;
+}
+.vessel-board tr:nth-child(2) th:nth-child(1){
+    background: #5672c6;
+    color: white;
+}
+.vessel-board tr:nth-child(3) th:nth-child(1){
+    background: #90c675;
+    color: white;
+}
+.vessel-board tr:nth-child(4) th:nth-child(1){
+    background: #fac85a;
+    color: white;
+}
+.vessel-board tr:nth-child(5) th:nth-child(1){
+    background: #ee6767;
+    color: white;
+}
+
+
+.vessel-list {
+    border: 1px solid transparent;
+    background: white;
+    width: 150px;
+    margin: -8px 0 5px 21px;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 0px;
+    visibility: hidden;
+    transition: height 0.3s, visibility 0.3s;
+
+    /* transition: transform 0.3s ease, opacity 0.3s ease;
+     transform: translateY(calc(100% - 100px)) scaleY(0);
+     transform-origin: top right;
+     opacity: 0;*/
+}
+
+.vessel-list.on {
+    height: 100px;
+    visibility: visible;
+    /*transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(0) scaleY(1);
+    opacity: 1;*/
+}
+
+.vessel-list ul {
+    text-align: center;
+}
+
+.vessel-list select {
+    width: 100px;
+    margin-bottom: 2px;
+}
+
+.vessel-list input {
+    width: 100px;
+    margin-bottom: 2px;
+}
+
+/*미세먼지 변화 버튼*/
+.monit-item {
+    display: none;
+}
+
+.monit-item.on{
+    display: block;
+}
+.monit-item li {
+    width: 150px;
+    height: 30px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.monit-dust.on {
+    background: #2f5597;
+    color: white;
+}
+
+.monit-pm10:hover {
+    cursor: pointer;
+    background: #2f5597;
+    color: white;
+}
+
+.monit-pm25:hover {
+    cursor: pointer;
+    background: #2f5597;
+    color: white;
+}
+
+/*미세먼지 슬라이더*/
+.dust-slider-section {
+    position: absolute;
+    width: 705px;
+    height: 106px;
+    border: 3px solid #2f5597;
+    border-radius: 15px;
+    background: #2f5597;
+    color: white;
+    right: 600px;
+    bottom: 114px;
+    z-index: 9999;
+    flex-direction: column;
+}
+.slider-dust-index-img-section {
+    position: absolute;
+    z-index: 9999;
+    bottom: 80px;
+    right: 0px;
+    margin-right: 16px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.dust-slider-btn-container {
+    display: flex;
+    align-items: center;
+    margin: 7px 0px 8px 10px;
+}
+
+.slider-dust-index-img-section img {
+
+    width: 564px;
+    margin-bottom: 14px;
+}
+
+.slider-dust-index-img {
+    display: none;
+}
+
+.slider-dust-index-img-01.on{
+    display: block;
+}
+
+.slider-dust-index-img-02.on{
+    display: block;
+}
+.dust-slider-btn {
+    color: white;
+    background: #8faadc;
+    border-radius: 14px;
+    border: none;
+}
+
+.dust-slider-btn:hover {
+    background: #8898b7;
+}
+
+.next-date-btn.off{
+    background: #b5b5b5;
+    color: #dfdfdf;
+}
+
+.next-date-btn.off:hover {
+    cursor: not-allowed;
+}
+
+
+.dust-date {
+    margin: 0px 7px 0px 7px;
+}
+
+.play-container {
+    display: flex;
+    align-items: center;
+    margin-top: 11px;
+}
+.slider-btn {
+    display: flex;
+    margin: 0px 13px 0 10px;
+
+}
+.slider-bar {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.play-btn {
+    border-radius: 6px;
+    color: white;
+    background: black;
+    border: 2px solid white;
+    width: 30px;
+    height: 30px;
+}
+
+.paused {
+    display: none;
+}
+
+.slider-time {
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+    margin: 0 28px 0 24px;
+}
+
+
+
+/*미세먼지 범례표*/
+.dust-index-img-section {
+    position: absolute;
+    left: -577px;
+    bottom: 50px;
+    z-index: 9999;
+}
+
+.dust-index-img-section img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 564px;
+    height: 41px;
+}
+
+.dust-index-img {
+    display: none;
+}
+
+.dust-index-img-01.on{
+    display: block;
+}
+
+.dust-index-img-02.on{
+    display: block;
+}
+/*시민제보 미세먼지 범례*/
+.tipoff-dust-index-img-section {
+    position: absolute;
+    z-index: 9999;
+    bottom: 80px;
+    right: 0;
+    margin-right: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.tipoff-dust-index-img {
+    display: none;
+    width: 564px;
+    margin-bottom: 14px;
+}
+
+.tipoff-dust-index-img.on {
+    display: inline-block;
+}
+
+/*미세먼지 경보*/
+.dust-issue {
+    width: 100px;
+    height: 150px;
+    border: 1px solid #c4707d;
+    border-radius: 6px;
+    background: #c4707d;
+    position: absolute;
+    left: -114px;
+    bottom: 60px;
+    z-index: 9999;
+    display: none;
+}
+
+.dust-issue.on {
+    display: block;
+}
+
+.dust-issue img {
+    width: 64px;
+    height: 69px;
+    right: -18px;
+    bottom: 8px;
+}
+
+.dust-issue-text {
+    text-align: center;
+    color: white;
+    font-size: 19px;
+}
+
+.issue-dust-type {
+    top: 3px;
+}
+
+.issue-admdst-name {
+    bottom: 8px;
+}
+
+/*미세먼지 지수 예보 구별 css*/
+.dust-board-table {
+    display: flex;
+}
+
+.dust-now-table {
+    width: 340px;
+}
+.dust-forecast-table {
+    width: 169.5px;
+}
+
+.dot-line {
+    height: 153px;
+    border-left : thick dotted #595959;
+    margin: 0 15px 0 15px;
+}
+/*대시보드 메뉴 커버*/
+.side-section-cover {
+    position: absolute;
+    width: 630px;
+    bottom: 0px;
+    top: 64px;
+    background: #ffffff;
+    z-index: 99999;
+    text-align: center;
+    font-size: 46px;
+    padding-top: 306px;
+    display: none;
+    border-radius: 20px;
+}
+
+.side-section-cover.active {
+    display: block;
+}
+
+.side-section-cover-content {
+    bottom: 192px;
+}
+.side-section-img img{
+    width: 400px;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+
+.ship-ratio-cover {
+    position: absolute;
+    width: 630px;
+    height: 49.4vh;
+    top: 38vh;
+    background: #FFFFFF;
+    z-index: 99999;
+    text-align: center;
+    font-size: 40px;
+    padding-top: 171px;
+    display: none;
+}
+
+.ship-ratio-cover.active1 {
+    display: block;
+}
+
+.ship-ratio-cover-content {
+    padding: 16px;
+    bottom: 168px;
+}
+
+.ship-ratio-cover-content img {
+    width: 300px;
+    height: 300px;
+}
+/*예보 팝업*/
+.forecast-container {
+    display: flex;
+}
+
+.forecast-info {
+    margin: 3px 0 0 44px;
+}
+
+.forecast-content {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    top: -112px;
+    right: -11px;
+    z-index: 9999;
+    background: #FFFFFF;
+    border-radius: 7px;
+    box-shadow: 5px 5px 10px;
+    padding: 12px;
+    font-size: 14px;
+    display: none;
+}
+
+.forecast-content:after {
+    position: absolute;
+    right: 10px;
+    top: 100px;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 16px solid #FFFFFF;
+    content:"";
+}
+
+.forecast-content.on {
+  display: block;
+}
+
+/*차트, 그래프*/
+.dust-ship-board {
+    height: 30vh;
+}
+
+.dust-ratio-board {
+    margin-top: 14px;
+    height: 437px;
+}
+.total-chart {
+    height: 25vh;
+    width: 545px;
+}
+
+.ship-chart {
+    height: 180px;
+    width: 545px;
+}
+
+.ship-ratio-chart-container {
+    display: flex;
+}
+
+.transport-chart {
+    height: 200px;
+    width: 272px;
+    flex: 2;
+}
+
+.vessel-board {
+    flex: 1;
+}
+
+
+/* 주임님 코드 끝 */
+
+/* 대시보드 */
+.side-section-port{
+    display: none;
+    overflow-y: auto;
+    max-height: 100%;
+    height: 100%;
+}
+.side-section-port.on{
+    display: block;
+}
+.side-section-area{
+    display: none;
+    overflow-y: auto;
+    max-height: 100%;
+    height: 100%;
+}
+.side-section-area.on{
+    display: block;
+}
+.side-section-galmaet{
+    display: none;
+    overflow-y: auto;
+    max-height: 100%;
+    height: 100%;
+}
+.side-section-galmaet.on{
+    display: block;
+}
+
+.side-section-front{
+    display: none;
+    overflow-y: auto;
+    max-height: 100%;
+    /*height: 100%;*/
+    height: 83vh;
+}
+.side-section-front.on{
+    display: block;
+}
+
+.side-section-back{
+    display: none;
+    overflow-y: auto;
+    max-height: 100%;
+    height: 100%;
+}
+.side-section-back.on{
+    display: block;
+}
+/* 대시보드 끝 */
+
+/* 시민제보 팝업 */
+#tipoff-popup {
+    background: #4472c4;
+    padding : 4px 12px;
+    border-radius: 8px;
+    display: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+
+.tipoff-popup-title {
+    text-align :center;
+    font-size:24px;
+    color:#FFFFFF;
+}
+
+.tipoff-popup-content {
+    display:flex;
+    flex-direction: column;
+    background: #ffffff;
+    margin: 4px 0;
+    padding : 8px 12px;
+    border-radius: 4px;
+}
+
+.tipoff-popup-date {
+    color: rgb(255, 208, 65);
+}
+
+.tipoff-popup-tipoff {
+
+}
+
+/* 시민제보 팝업 끝 */
+
+/* 갈맷길 팝업 */
+#gm-popup{
+    background: #4573c4;
+    padding : 4px 12px;
+    border-radius: 8px;
+    display: none;
+    position: absolute;
+    left: 15px;
+    width: 120px;
+}
+
+.gm-popup-title {
+    color: #ffffff;
+}
+
+.gm-popup-content {
+    color: white;
+}
+/* 갈맷길 팝업 끝 */
+
+/* 페이지 버튼 */
+.page-btn > img {
+    width: 28px;
+    height: 28px;
+}
+/* 페이지 버튼 끝 */
+
+.dust-chart-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-right: 20px;
+}
+
+.dust-chart-header > img {
+    height: 20px;
+    width: 219px;
+    margin-right: 5px;
+    margin-bottom: 7px;
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <!-- Common -->
+        <typeAlias alias="AdmdstDataVO" type="kr.go.busan.smartvillage.comm.vo.AdmdstDataVO"/>
+        <typeAlias alias="RegionNameCode" type="kr.go.busan.smartvillage.comm.code.RegionNameCode"/>
+
+        <!-- Main -->
+        <typeAlias alias="FileVO" type="kr.go.busan.smartvillage.main.vo.FileVO"/>
+        <typeAlias alias="JobVO" type="kr.go.busan.smartvillage.main.vo.JobVO"/>
+        <!-- Target1 -->
+        <typeAlias alias="EmdDataVO" type="kr.go.busan.smartvillage.target01.vo.EmdDataVO"/>
+        <typeAlias alias="LProjectVO" type="kr.go.busan.smartvillage.target01.vo.LProjectVO"/>
+        <typeAlias alias="CCTVInfoVO" type="kr.go.busan.smartvillage.target01.vo.CCTVInfoVO"/>
+        <typeAlias alias="CCTVShotInfoVO" type="kr.go.busan.smartvillage.target01.vo.CCTVShotInfoVO"/>
+        <typeAlias alias="WaterLvlVO" type="kr.go.busan.smartvillage.target01.vo.WaterLvlVO"/>
+        <typeAlias alias="WrnInfoVO" type="kr.go.busan.smartvillage.target01.vo.WrnInfoVO"/>
+        <typeAlias alias="BizInfoVO" type="kr.go.busan.smartvillage.target01.vo.BizInfoVO"/>
+
+        <typeAlias alias="ActivityVO" type="kr.go.busan.smartvillage.target01.vo.ActivityVO"/>
+
+        <typeAlias alias="SatelVO" type="kr.go.busan.smartvillage.target01.vo.SatelVO"/>
+        <typeAlias alias="WaterLvlVO" type="kr.go.busan.smartvillage.target01.vo.WaterLvlVO"/>
+
+        <!-- Target2 -->
+        <typeAlias alias="FeaturePropVO" type="kr.go.busan.smartvillage.target02.vo.FeaturePropVO"/>
+        <typeAlias alias="PortMsrstnVO" type="kr.go.busan.smartvillage.target02.vo.PortMsrstnVO"/>
+        <typeAlias alias="LifePatternVO" type="kr.go.busan.smartvillage.target02.vo.LifePatternVO"/>
+        <typeAlias alias="GalmaetVO" type="kr.go.busan.smartvillage.target02.vo.GalmaetVO"/>
+        <typeAlias alias="ForecastVO" type="kr.go.busan.smartvillage.target02.vo.ForecastVO"/>
+        <typeAlias alias="IssueInfoVO" type="kr.go.busan.smartvillage.target02.vo.IssueInfoVO"/>
+        <!-- <typeAlias alias="PortShipVO" type="kr.go.busan.smartvillage.target02.vo.PortShipVO"/>-->
+        <typeAlias alias="PortInfoVO" type="kr.go.busan.smartvillage.target02.vo.PortInfoVO"/>
+        <typeAlias alias="PortShipInfoVO" type="kr.go.busan.smartvillage.target02.vo.PortShipInfoVO"/>
+
+        <typeAlias alias="GalmaetGilTourVO" type="kr.go.busan.smartvillage.target02.vo.GalmaetGilTourVO"/>
+        <typeAlias alias="AodVO" type="kr.go.busan.smartvillage.target02.vo.AodVO"/>
+        <typeAlias alias="MeasuringStationVO" type="kr.go.busan.smartvillage.target02.vo.MeasuringStationVO"/>
+        <typeAlias alias="MicroDustInfoVO" type="kr.go.busan.smartvillage.target02.vo.MicroDustInfoVO"/>
+
+        <!--        <typeAlias type=""-->
+
+        <!-- Target3 -->
+
+        <typeAlias alias="GeoStructure" type="kr.go.busan.smartvillage.comm.vo.GeoStructure"/>
+
+    </typeAliases>
+</configuration>

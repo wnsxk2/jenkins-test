@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" monitorInterval="5"><!-- monitorInterval 파일의 변경 여부를 확인하는 주기로 분(minute) 기준 -->
+    <!-- 변수 -->
+    <Properties>
+        <Property name="LOG_ROOT_LEVEL">ERROR</Property>
+        <Property name="LOG_OFF_LEVEL">OFF</Property>
+        <Property name="LOG_ERROR_LEVEL">ERROR</Property>
+        <Property name="LOG_WARN_LEVEL">WARN</Property>
+        <Property name="LOG_INFO_LEVEL">INFO</Property>
+        <Property name="LOG_ROOT_LEVEL">DEBUG</Property>
+        <Property name="LOG_FILE_NAME">smartvillage</Property>
+        <Property name="LOG_PATH">D:/logs/smartvillage</Property>
+        <Property name="LOG_BACKUP_PATH">${LOG_PATH}/backup</Property>
+        <Property name="LOG_MAX_FILE_SIZE">10MB</Property>
+        <Property name="LOG_MAX_TIME_ROLLOVER">1</Property><!-- 정리되는 시간 주기 -->
+        <Property name="LOG_MAX_HISTORY">60</Property>
+        <Property name="LOG_PATTERN">%-5level %date{yy-MM-dd HH:mm:ss} [%thread] [%location] - %msg%n</Property>
+    </Properties>
+
+    <!-- 출력 셋팅 -->
+    <Appenders>
+        <!-- CONSOLE 로그 출력 셋팅  -->
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+        </Console>
+
+        <!-- File 로그 출력 셋팅 -->
+        <RollingFile name="FILE"
+                     fileName="${LOG_PATH}/${LOG_FILE_NAME}.log"
+                     filePattern="${LOG_BACKUP_PATH}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.%i.log.zip">
+            <PatternLayout pattern="${LOG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="${LOG_MAX_FILE_SIZE}" />
+                <TimeBasedTriggeringPolicy interval="${LOG_MAX_TIME_ROLLOVER}"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1000" fileIndex="max" />
+        </RollingFile>
+    </Appenders>
+
+    <!-- 출력 패키지 셋팅 -->
+    <Loggers>
+        <!-- 패키지별 셋팅 -->
+        <!--<Logger name="kr.go.busan.smartvillage" level="${LOG_ROOT_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>-->
+        <Logger name="kr.co.greenblue" level="${LOG_ERROR_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+        <Logger name="java.sql" level="${LOG_INFO_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+        <Logger name="jdbc.sqltiming" level="${LOG_INFO_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+        <Logger name="jdbc.connection" level="${LOG_OFF_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+
+        <Logger name="jdbc.audit" level="${LOG_OFF_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+        <Logger name="jdbc.resultset" level="${LOG_OFF_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+
+        <Logger name="egovframework" level="${LOG_ERROR_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+
+        <Logger name="org.egovframe" level="${LOG_ERROR_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+
+        <Logger name="org.springframework" level="${LOG_ERROR_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+
+        <Logger name="org.springframework.beans" level="${LOG_WARN_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Logger>
+
+        <!-- Root 레벨 -->
+        <Root level="${LOG_ROOT_LEVEL}">
+            <AppenderRef ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </Root>
+
+    </Loggers>
+
+</Configuration>

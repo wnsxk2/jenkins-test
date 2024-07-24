@@ -1,0 +1,948 @@
+td {
+    word-break: break-all;
+}
+.file-upload-main {
+    border: 1px solid #bfbfbf;
+    position: absolute;
+    top: 14vh;
+    left: 27vw;
+    width: 60vw;
+    height: 80dvh;
+    border-radius: 7px;
+    padding: 2vw;
+}
+
+.file-upload-main.hide {
+    display: none;
+}
+
+.file-upload-title {
+    position: absolute;
+    font-size: 1.6vw;
+}
+
+.file-upload-container {
+    position: absolute;
+    top: 115px;
+}
+
+.file-box input{width: 100%;}
+
+.file-box textarea{resize:none;}
+
+.file-box .file-drop {
+    display: inline-block;
+    width: 55.8vw;
+    height: 20vh;
+    border: 2px dashed #bfbfbf;
+    border-radius: 12px;
+    background: #ededed;
+    overflow: auto;
+    margin-top: 18px;
+}
+
+.file-box .file-drop::-webkit-scrollbar {
+    display: none;
+}
+
+.file-drop .file-name{padding-left: 20px;}
+
+.file-drop .file-size{padding-right: 20px; float:right;}
+
+.file-drop {
+    margin-bottom: 20px;
+}
+
+.file-upload-text {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.file-select-text {
+    color:#595959;
+}
+
+.popup-btn-container {
+    text-align: center;
+}
+
+.popup-btn {
+    background: #fff2cc;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+}
+
+
+.file-list-container {
+    border: 1px solid #bfbfbf;
+    margin: 5px 0 5px;
+    padding: 0.5vw;
+    border-radius: 8px;
+}
+
+.file-list {
+    max-width: 970px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 47vw;
+}
+.file-canvas {
+    width: 30px;
+    height: 30px;
+}
+
+.file-delete-btn.on {
+    position: absolute;
+    right: 0;
+    margin-right: 11px;
+    top: 17%;
+    display: block;
+    border: none;
+    border-radius: 4px;
+    background: gray;
+    color: white;
+}
+
+.file-delete-btn{
+    display: none;
+}
+
+
+.file-count-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.now-file-count {
+    color: #ee315e;
+}
+
+.delete-all-files {
+    display: none;
+}
+
+.delete-all-files.on {
+    display: block;
+    border: none;
+    border-radius: 4px;
+    background: gray;
+    color: white;
+}
+
+.job-name-container {
+    display: flex;
+    top: 90px;
+}
+
+.job-name {
+    margin-right: 18px;
+}
+
+.job-name-list {
+    text-align: center;
+    width: 240px;
+}
+
+/*업로드 팝업*/
+.pop-wrap {
+    position: fixed;
+    z-index: 9999;
+    transform: translate(-20%, -59%);
+    top: 50%;
+    left: 50%;
+    display: none;
+}
+
+.pop-wrap.on {
+    display: block;
+}
+
+.pop-container {
+    width: 375px;
+    height: 266px;
+    border: 1px solid #aba9a9;
+    border-radius: 6px;
+    background: #FFFFFF;
+}
+
+.pop-header {
+    height: 40px;
+    background: #ededed;
+    display: flex;
+    font-size: 21px;
+}
+
+.pop-header p {
+    padding: 5px;
+}
+
+.pop-header-close {
+    position: absolute;
+    right: 5px;
+    top: 4px;
+}
+
+.pop-header-close:hover {
+    cursor: pointer;
+    color: #8d8d8d;
+}
+
+.pop-contents {
+    font-size: 12px;
+    padding: 10px;
+    line-height: 18px;
+}
+
+.pop-contents-inner {
+    margin-bottom: 10px;
+}
+
+.pop-title {
+    font-size: 15px;
+}
+
+.pop-job-name span {
+    color: #ed2756;
+    font-weight: bold;
+}
+
+.pop-file-name {
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+.pop-contents-info {
+    font-size: 13px;
+}
+
+
+.upload-btn-container {
+    display: flex;
+    position: fixed;
+    bottom: 4px;
+    right: 129px;
+    z-index: 1100; /* 팝업보다 더 높은 z-index 설정 */
+    padding: 10px;
+}
+
+.upload-btn {
+    background: #fff2cc;
+    border: 1px solid #bfbfbf;
+    height: 21px;
+    border-radius: 4px;
+}
+
+.pop-close-btn {
+    border: 1px solid #bfbfbf;
+    width: 50px;
+    height: 21px;
+    text-align: center;
+    padding: 2px;
+    background: #f2f2f2;
+    border-radius: 4px;
+    margin-left: 8px;
+    font-size: 13px;
+}
+.pop-close-btn:hover {
+    cursor: pointer;
+}
+
+.progress-bar {
+    position: absolute;
+    width: 42px;
+    height: 32px;
+    margin-left: 10px;
+    background-color: transparent;
+    top: 17%;
+    right: 17px;
+}
+
+.progress-bar.on {
+    display: none;
+}
+
+.circular-bg {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 3.5;
+}
+
+.circular {
+    fill: none;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke: #022261;
+    transition: stroke-dasharray 0.4s, stroke-dashoffset 0.4s;
+}
+
+.circular.full {
+    fill: #022261;
+}
+
+.file-upload-check {
+    position: absolute;
+    right: 28px;
+    top: 11px;
+    z-index: 999;
+    display: none;
+}
+
+.file-upload-check img {
+    width: 20px;
+    height: 20px;
+}
+
+.file-upload-check.on {
+    display: block;
+}
+
+/*파일업로드 게시판*/
+.file-upload-board-container {
+    border: 1px solid #bfbfbf;
+    position: absolute;
+    top: 14vh;
+    left: 27vw;
+    width: 60vw;
+    height: 80dvh;
+    border-radius: 7px;
+    padding: 2vw;
+}
+
+.file-upload-board {
+    width: 100%;
+    border: 2px solid #737373;
+    text-align: center;
+    margin-top: 12px;
+    border-collapse: collapse;
+    font-size: 0.84vw;
+}
+
+.file-upload-board, th, td {
+    padding: 0.65vw;
+}
+
+table, th, td {
+    border: none;
+}
+
+.table-header {
+    border-bottom: 2px solid #737373;
+    white-space : nowrap;
+    font-size: 1.1vw;
+}
+
+table tr:nth-child(2n) {
+    background-color: #ededed;
+}
+
+
+.delete-pop-wrap {
+    position: absolute;
+    top: 120px;
+    left: 303px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 11px;
+}
+
+.file-board-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.file-board-title {
+    font-size: 1.6vw;
+}
+
+
+.calendar-container {
+    font-size: 0.8vw;
+}
+
+.calendar {
+    width: 9vw;
+    height: 2.4vh;
+    text-align: center;
+}
+.calendar:hover {
+    cursor: pointer;
+}
+
+.calendar-btn {
+    width: 4vw;
+}
+
+.date-search-btn {
+    background: #fff2cc;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+}
+
+.date-refresh-btn {
+    background: #f2f2f2;
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+}
+
+
+/*파일업로드 게시판 수정 팝업*/
+.file-upload-board-pop {
+    position: fixed;
+    z-index: 9999;
+    transform: translate(-20%, -59%);
+    top: 50%;
+    left: 50%;
+   /* top: 150px;
+    left: 302px;*/
+    width: 375px;
+    height: 266px;
+    border: 1px solid #aba9a9;
+    border-radius: 6px;
+    background: #FFFFFF;
+}
+
+.edit-pop-container {
+    display: none;
+}
+
+.edit-pop-container.on{
+    display: block;
+}
+
+.update-file-container {
+    display: flex;
+    justify-content: center;
+}
+
+.update-file-drop {
+    width: 284px;
+    height: 90px;
+    border: 2px dashed #bfbfbf;
+    border-radius: 12px;
+    background: #ededed;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top: 20px;
+}
+
+.edit-pop-container.file-select-text {
+    font-size: 17px;
+    top: 4px;
+}
+
+.edit-file-name-container {
+    display: flex;
+    justify-content: center;
+}
+
+.edit-file-name {
+    border: 1px solid #bfbfbf;
+    width: 288px;
+    display: flex;
+    margin-top: 43px;
+    border-radius: 3px;
+    font-size: 14px;
+    padding: 4px 0px 4px 9px;
+}
+
+.edit-file-name img {
+    position: absolute;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.upload-file-popup-btn {
+    border: none;
+    border-radius: 4px;
+    background: gray;
+    color: white;
+    width: 3.2vw;
+    height: 3vh;
+}
+
+.upload-file-popup-btn img {
+    width: 14px;
+    height: 17px;
+}
+
+.upload-file-delete-popup-btn img {
+    width: 15px;
+    height: 18px;
+}
+
+.upload-file-update-btn {
+    background: #fff2cc;
+    border: 1px solid #bfbfbf;
+    width: 50px;
+    height: 21px;
+    text-align: center;
+    padding: 2px;
+    border-radius: 4px;
+    margin-left: 8px;
+    font-size: 13px;
+}
+
+/*파일업로드 게시판 삭제 팝업*/
+.delete-pop-container {
+    display: none;
+}
+
+.delete-pop-container.on {
+    display: block;
+}
+
+.upload-file-delete-btn {
+    border: 1px solid #bfbfbf;
+    width: 50px;
+    height: 21px;
+    text-align: center;
+    padding: 2px;
+    background: #fff2cc;
+    border-radius: 4px;
+    margin-left: 8px;
+    font-size: 13px;
+}
+
+.delete-job-name span {
+    color: #ed2756;
+    font-weight: bold;
+}
+
+.delete-job-date span {
+    color: #ed2756;
+    font-weight: bold;
+}
+
+.delete-file-name {
+    left: 1vw;
+}
+
+
+/*사이드메뉴*/
+.side-menu-wrap {
+    position: absolute;
+    border: 1px solid #bfbfbf;
+    width: 17vw;
+    height: 80dvh;
+    top: 14vh;
+    left: 2.8vw;
+    border-radius: 6px;
+    padding: 1.3vw;
+    white-space : nowrap
+}
+
+.side-menu-id {
+    font-size: 1.6vw;
+}
+
+.menu-list-title {
+    font-size: 1.3vw;
+}
+
+.menu-list ol {
+    text-indent: 1em;
+}
+
+.menu-list ol li {
+    margin: 17px 17px 17px 0;
+}
+
+.menu-list a {
+    text-decoration:none;
+    color: black;
+    font-size: 1vw;
+}
+
+.menu-list ol li {
+    margin: 17px 17px 17px 0;
+}
+
+.menu-list-item.on {
+    background: #36aeec;
+    border-radius: 4px;
+    padding: 0.4vw;
+}
+
+/*모바일*/
+.mobile-side-menu-wrap {
+    display: none;
+}
+
+/*.mobile-side-menu-wrap.show {
+    display: block;
+}*/
+
+.mobile-my-page {
+    position: absolute;
+    width: 100%;
+    height: 137px;
+    top: 54px;
+}
+
+.mobile-side-menu-container {
+    position: relative;
+    left: 10px;
+    font-size: 11px;
+    color: #a2a2a2;
+    display: none;
+}
+
+.mobile-side-menu-container img {
+    width: 15px;
+    height: 15px;
+}
+
+.mobile-side-menu-data-pop-wrap {
+    position: absolute;
+    top: 222px;
+    width: 100%;
+    height: 77vh;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9998;
+    display: none;
+}
+
+.mobile-side-menu-data-pop-wrap.show {
+    display: block;
+}
+
+.mobile-side-menu-data-pop-container {
+    width: 100%;
+    background: #FFFFFF;
+    height: 203px;
+    padding: 14px;
+    top: 32lvh;
+    z-index: 9999;
+    border-radius: 10px;
+}
+
+.mobile-side-menu-radio-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-side-top-menu {
+    display: none;
+}
+
+.mobile-side-top-menu.show {
+    display: flex;
+}
+
+.mobile-side-low-menu {
+    display: none;
+}
+
+.mobile-side-low-menu.show {
+    display: flex;
+}
+
+.mobile-file-upload-pop {
+    width: 100%;
+    height: 67dvh;
+    background: white;
+    top: 256px;
+    font-size: 22px;
+    text-align: center;
+    display: none;
+    position: absolute;
+}
+
+.mobile-file-upload-pop img {
+    width: 160px;
+}
+
+.mobile-file-upload-pop.show {
+    display: block;
+}
+
+.mobile-file-upload-pop-text {
+    top:20px
+}
+
+.mobile-file-upload-pop-title {
+    font-size: 36px;
+}
+
+
+.under-line {
+   /* text-decoration: underline;*/
+    border-bottom: 1px solid #bfbfbf;
+}
+.mobile-side-menu-radio-wrap label {
+    padding-bottom: 2px;
+}
+.mobile-side-btn-container {
+    z-index: 9999;
+}
+
+.mobile-side-menu-close-btn-wrap {
+    display: flex;
+    justify-content: flex-end;
+    top: -30px;
+}
+
+.mobile-side-menu-close-btn-wrap img{
+    width: 20px;
+    height: 20px;
+}
+
+.mobile-side-btn {
+    border: none;
+    width: 63px;
+    height: 28px;
+    border-radius: 5px;
+    background: #e1e1e1;
+}
+
+.mobile-side-btn.on {
+    border: none;
+    background: #0baefe;
+    color: white;
+    border-radius: 5px;
+}
+
+/*.mobile.show {
+    display: flex;
+}
+.mobile {
+    display: none;
+}*/
+/*반응형*/
+
+@media screen and (min-width: 1300px) and (max-width: 1900px) {
+    /*게시판*/
+    .upload-file-popup-btn img {
+        display: none;
+    }
+
+}
+
+@media screen and (min-width: 600px) and (max-width: 1400px) {
+    .file-upload-title {
+        font-size: 2.5vw;
+    }
+    .file-board-title {
+        font-size: 2.2vw;
+    }
+
+    .job-name-container {
+        display: flex;
+        justify-content: center;
+    }
+    .file-box .file-drop {
+        width: 55.8vw;
+        height: 159px;
+    }
+
+
+    .file-upload-text {
+        margin-top: 25px;
+    }
+
+    .file-upload-text p {
+        display: block;
+    }
+
+    .file-upload-text p span.break-line {
+        display: block;
+    }
+
+    .pop-wrap {
+        transform: translate(-27%, -59%);
+    }
+
+    .side-menu-wrap {
+        font-size: calc(var(--font-size-md) * 0.9);
+    }
+
+    .mobile-pop {
+        width: 57vw;
+        height: 66dvh;
+        background: white;
+        top: 10px;
+        font-size: 21px;
+        text-align: center;
+        display: none;
+    }
+
+    .mobile-pop.on {
+        display: block;
+    }
+
+    /*게시판*/
+    .calendar {
+        height: 22px;
+        width: 12vh;
+    }
+    .calendar-container {
+        font-size: 1.05vw;
+    }
+
+    .calendar-btn {
+        width: 6.5vw;
+    }
+
+    .upload-file-popup-btn {
+        height: 2vh;
+        width: 6.1vw;
+    }
+
+    .file-upload-board {
+        font-size: 1vw;
+        height: 80%;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    /*게시판*/
+    .file-board-header {
+        display: block;
+    }
+
+    .calendar-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .upload-file-popup-btn img {
+        display: none;
+    }
+}
+
+
+/*모바일*/
+@media screen and (max-width: 767px) {
+    .file-upload-title {
+        font-size: 4vw;
+    }
+    .side-menu-wrap {
+        display: none;
+    }
+
+    .file-upload-main {
+    /*    font-size: calc(var(--font-size-md) * 0.9);*/
+        border: 1px solid #bfbfbf;
+        top: 26px;
+        left: 7vw;
+        width: 86vw;
+        height: 74dvh;
+        border-radius: 7px;
+        padding: 2vw;
+    }
+
+    .job-name-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .file-upload-container {
+        position: relative;
+        top: 115px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .file-upload-text {
+        padding: 0 25px 0 25px;
+    }
+    .pop-wrap {
+        transform: translate(-50%, -59%);
+    }
+
+    .file-delete-btn.on {
+        top: 12%;
+    }
+    .progress-bar {
+        top: 12%;
+    }
+
+    .mobile-pop {
+        width: 82vw;
+        height: 67dvh;
+        background: white;
+        top: 10px;
+        font-size: 27px;
+        text-align: center;
+        display: none;
+    }
+
+    .mobile-pop.on {
+        display: block;
+    }
+
+
+
+
+    /*****게시판****/
+    .file-board-title {
+        font-size: 4vw;
+    }
+
+    .calendar-container {
+        font-size: 8px;
+    }
+
+    .calendar {
+        width: 88px;
+        height: 18px;
+    }
+    .calendar-btn {
+        width: 51px;
+    }
+    .file-upload-board-container {
+        border: 1px solid #bfbfbf;
+        position: relative;
+        top:17px;
+        left: 4vw;
+        width: 91vw;
+        height: 64lvh;
+        border-radius: 7px;
+        padding: 2vw;
+    }
+
+    .file-upload-board {
+        width: 100%;
+        border: 2px solid #737373;
+        text-align: center;
+        margin-top: 12px;
+        border-collapse: collapse;
+        font-size: 2.2vw;
+        height: 80%;
+    }
+    .upload-file-popup-btn {
+        width: 7.5vw;
+        height: 2vh;
+        font-size: 7px;
+    }
+
+    main {
+        top: 197px; /*87*/
+    }
+
+    .mobile-side-menu-container {
+        display: flex;
+        top: 5px;
+    }
+    .mobile-side-menu-wrap {
+        display: block;
+    }
+
+    .page-link {
+        font-size: 9px;
+    }
+
+    .pagination-container {
+        margin-top: -11px;
+    }
+}
+

@@ -1,0 +1,979 @@
+/* 로딩 최적화 */
+.lazyload {
+    opacity: 0;
+    transition: opacity 300ms;
+}
+.lazyload.lazyloaded {
+    opacity: 1;
+}
+
+/* 로딩 최적화 끝 */
+main {
+}
+
+/* main */
+
+#section1 {
+    height: 950px;
+}
+
+#main-day, #main-night {
+    /*width: 100%;*/
+    /*height: 950px;*/
+    /*position: relative;*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+    /*display: none;*/
+}
+
+#main-day {
+    background-image: url("../../images/main/main_day.webp");
+}
+
+#main-night {
+    background-image: url("../../images/main/main_night.webp");
+}
+
+/* 낮/밤 테스트용 버튼 */
+.hour-test-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hour-test-btn:hover {
+    cursor: pointer;
+}
+
+.test-div {
+    position: absolute;
+    right: 1%;
+    top: 1%;
+}
+
+.day-btn, .night-btn {
+    padding: 5px;
+    margin: 5px;
+    border-style: none;
+    border-radius: 15px;
+}
+
+.day-btn:hover, .night-btn:hover {
+    cursor: pointer;
+}
+.on {
+    background-color: #00AAFF;
+    color: white;
+}
+/* 테스트 끝 */
+
+.people-section {
+    position: absolute;
+    top: 2%;
+    left: 18%;
+}
+
+.people-img {
+    height: 28vw;
+    width: 27.03vw;
+    background-image: url(../../images/main/main_collection_1.webp);
+    background-size: 26vw 215vw;
+    background-position: 0% 15%;
+    background-repeat: no-repeat;
+}
+
+.people-img.night {
+    background-position: 0% 0%;
+}
+
+.people-hover {
+    position: absolute;
+    height: 12vw;
+    width: 12.85vw;
+    background-image: url(../../images/main/main_collection_1.webp);
+    background-size: 20vw 147.3vw;
+    background-repeat: no-repeat;
+    background-position: 0% 100%;
+    left: 30%;
+    top: 31%;
+}
+
+.people-question {
+    position: absolute;
+    left: 25%;
+    top: 24%;
+
+    background-image: url(../../images/main/main_collection_2.webp);
+    background-size: 28vw 21.85vw;
+    background-position: 43.088% 62.866%;
+    background-repeat: no-repeat;
+}
+
+.people-msg {
+    height: 10vw;
+    width: 19.68vw;
+    background-image: url(../../images/main/text_collection.webp);
+    background-size: 37vw 33vw;
+    background-position: 2.089% 47.624%;
+    background-repeat: no-repeat;
+}
+
+.satellite-section {
+    position: absolute;
+    top: 0%;
+    right: 35%;
+}
+
+.satellite-img {
+    height: 18vw;
+    width: 20.26vw;
+
+    background-position: 0.685% 12.462%;
+    background-image: url(../../images/main/main_collection_2.webp);
+    background-size: 43vw 38vw;
+    background-repeat: no-repeat;
+}
+
+.satellite-hover {
+    position: absolute;
+    /*right: -22%;*/
+    /*top: 45%;*/
+    height: 12vw;
+
+    width: 12.64vw;
+    background-image: url(../../images/main/main_collection_1.webp);
+    background-size: 38vw 295.79vw;
+    background-position: 0% 71.3%;
+    background-repeat: no-repeat;
+    right: -23%;
+    top: 48%;
+}
+
+.satellite-question {
+    position: absolute;
+    right: 0%;
+    top: 21%;
+
+    background-image: url(../../images/main/main_collection_2.webp);
+    background-size: 28vw 21.85vw;
+    background-position: 30.8% 62.866%;
+    background-repeat: no-repeat;
+}
+
+.satellite-msg {
+    height: 10vw;
+    width: 19.68vw;
+    background-image: url(../../images/main/text_collection.webp);
+    background-size: 36vw 32vw;
+    background-position: 2.089% 0.756%;
+    background-repeat: no-repeat;
+}
+
+.trash-section {
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+}
+
+.trash-img {
+    height: 23.4vw;
+    width: 41vw;
+    background-image: url(../../images/main/main_collection_1.webp);
+    background-size: 40.6vw 293.7vw;
+    background-position: 0% 65.34%;
+    background-repeat: no-repeat;
+}
+
+.trash-img.night {
+    background-position: 0% 56.7%;
+}
+
+.trash-hover {
+    position: absolute;
+    height: 22vw;
+    width: 28.89vw;
+    background-image: url(../../images/main/main_collection_1.webp);
+    background-size: 28.8vw 207.7vw;
+    background-position: 0% 81.1%;
+    background-repeat: no-repeat;
+    left: 12.7%;
+    bottom: 2%;
+}
+
+.trash-question {
+    position: absolute;
+    left: 58%;
+    bottom: 64%;
+
+    background-image: url(../../images/main/main_collection_2.webp);
+    background-size: 28vw 21.85vw;
+    background-position: 30.8% 62.866%;
+    background-repeat: no-repeat;
+}
+
+.trash-msg {
+    height: 12vw;
+    width: 18.68vw;
+    background-image: url(../../images/main/text_collection.webp);
+    background-size: 43vw 35vw;
+    background-position: 79.814% 98.926%;
+    background-repeat: no-repeat;
+}
+
+.ship-section {
+    position: absolute;
+    bottom: 10%;
+    right: 36%;
+}
+
+.ship-img {
+    height: 10vw;
+    width: 16.76vw;
+    background-image: url(../../images/main/main_collection_2.webp);
+    background-size: 34vw 29.1vw;
+    background-position: 99.294% 0.703%;
+    background-repeat: no-repeat;
+}
+
+.ship-hover {
+    position: absolute;
+    bottom: 77%;
+    height: 10vw;
+    width: 7.55vw;
+    background-image: url(../../images/main/main_collection_2.webp);
+    background-size: 28vw 21.85vw;
+    background-position: 0.494% 99.16%;
+    left: 30%;
+}
+
+.ship-question {
+    position: absolute;
+    left: 5%;
+    bottom: 74%;
+    background-image: url(../../images/main/main_collection_2.webp);
+    background-size: 28vw 21.85vw;
+    background-position: 43.088% 62.866%;
+    background-repeat: no-repeat;
+}
+
+.ship-msg {
+    height: 11vw;
+    width: 18.68vw;
+    background-image: url(../../images/main/text_collection.webp);
+    background-size: 43vw 32vw;
+    background-position: 0.723% 98.926%;
+    background-repeat: no-repeat;
+}
+
+.mountain-section {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+}
+
+.mountain-img {
+    height: 41vw;
+    width: 37.39vw;
+    background-image: url(../../images/main/main_collection_1.webp);
+    background-size: 41vw 330.48vw;
+    background-position: 0% 30%;
+    background-repeat: no-repeat;
+}
+
+.mountain-img.night {
+    background-position: 0% 44.89%;
+}
+
+.mountain-hover {
+    position: absolute;
+    right: 2%;
+    height: 17vw;
+    width: 25.95vw;
+    background-image: url(../../images/main/main_collection_1.webp);
+    background-size: 25vw 201.79vw;
+    background-position: 0% 91%;
+    background-repeat: no-repeat;
+    top: -1.5%;
+}
+
+.mountain-question {
+    position: absolute;
+    right: 59%;
+    top: 28%;
+    background-image: url(../../images/main/main_collection_2.webp);
+    background-size: 28vw 21.85vw;
+    background-position: 43.088% 62.866%;
+    background-repeat: no-repeat;
+}
+
+.mountain-msg {
+    height: 11vw;
+    width: 18.68vw;
+    background-image: url(../../images/main/text_collection.webp);
+    background-size: 42vw 32vw;
+    background-position: 99.226% 0.791%;
+    background-repeat: no-repeat;
+}
+
+.question-mark {
+    height: 3vw;
+
+    width: 3vw;
+}
+
+.question-mark:hover {
+    cursor: pointer;
+}
+/* common */
+.hide{
+    display: none;
+}
+.show{
+    display: block;
+}
+/* common 끝 */
+.hidden {
+    visibility: hidden;
+}
+
+.click-content {
+    /*width: 18vw;*/
+    /*height: 22vh;*/
+}
+
+.trash-content {
+    position: absolute;
+    left: 25%;
+    /*top: 39%;*/
+    top: 40.5%;
+}
+
+.people-content {
+    position: absolute;
+    left: 28%;
+    top: 13.5%;
+}
+
+.satellite-content {
+    position: absolute;
+    /*right: 16%;*/
+    top: 5%;
+    right: 14.5%;
+}
+
+.ship-content {
+    position: absolute;
+    /*left: 31%;*/
+    left: 31.5%;
+    bottom: 30%;
+}
+
+.mountain-content {
+    position: absolute;
+    right: 22%;
+    top: 17.7%;
+}
+
+.blur {
+    filter: blur(3px);
+    opacity: 0.5;
+}
+
+.background-blur::before {
+    content: "";
+    position: absolute;;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(3px);
+}
+
+
+/* 팝업 */
+.close-popup {
+    width: 2vw;
+    height: 2vw;
+    background-image: url(../../images/main/main_collection_2.webp);
+    background-size: 104vw 104.76vw;
+    background-position: 48.803% 41.387%;
+    background-repeat: no-repeat;
+}
+
+.close-popup:hover {
+    cursor: pointer;
+}
+
+#people-close {
+    right: -6%;
+    top: -14%;
+    position: absolute;
+}
+
+#trash-close {
+    right: -5%;
+    top: -10%;
+    position: absolute;
+}
+
+#satellite-close {
+    position: absolute;
+    top: -12%;
+    right: -4%;
+}
+
+#ship-close {
+    right: -5%;
+    top: -11%;
+    position: absolute;
+}
+
+#mountain-close {
+    right: -5%;
+    top: -11%;
+    position: absolute;
+}
+
+/* main 끝 */
+
+/* section 2 3 4 */
+#section2, #section3, #section4 {
+    /*width: 100vw;*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+    /*position: relative;*/
+}
+
+/* section 2 */
+#section2 {
+    background-image: url("../../images/main/section02/section02_main.webp");
+    /*height: 1200px;*/
+    height: 62.5vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+}
+
+#section2 .left-line {
+    position: absolute;
+    top: -0.3%;
+    left: 6.5%;
+}
+
+#section2 .right-line {
+    position: absolute;
+    right: 8%;
+    top: 11.5%;
+}
+
+#section2 .left-line img,
+#section2 .right-line img {
+    width: 21vw;
+    height: 0.1vw;
+}
+
+#section2 .cctv01 {
+    position: absolute;
+    left: 23.5%;
+    top: 53.5%;
+}
+
+#section2 .cctv02 {
+    position: absolute;
+    left: 23.5%;
+    top: 67%;
+}
+
+#section2 .dron {
+    position: absolute;
+    top: 57%;
+    right: 25%;
+}
+
+#section2 .cctv01 img{
+    height: 8vw;
+}
+
+#section2 .cctv02 img{
+    height: 7vw;
+}
+
+#section2 .dron img{
+    height: 8vw;
+}
+
+/* section 2 끝 */
+
+/* section 3 */
+#section3 {
+    background-image: url("../../images/main/section03/section03_main.webp");
+    /*height: 1500px;*/
+    height: 78.12vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0px;
+}
+
+#section3 .left-line {
+    position: absolute;
+    top: 0%;
+    left: 7%;
+}
+
+#section3 .right-line {
+    position: absolute;
+    top: 8.4%;
+    right: 10%;
+}
+
+#section3 .left-line img,
+#section3 .right-line img {
+    width: 32vw;
+    height: 0.1vw;
+}
+
+#section3 .satellite {
+    position: absolute;
+    top: 24%;
+    left: 19%;
+}
+
+#section3 .magnifier {
+    position: absolute;
+    top: 31%;
+    left: 38%;
+}
+
+#section3 .message {
+    position: absolute;
+    right: 20%;
+    top: 64%;
+}
+
+#section3 .satellite img {
+    height: 12vw
+}
+
+#section3 .magnifier img {
+    height: 8vw
+}
+
+#section3 .message img {
+    height: 8vw
+}
+/* section 3 끝 */
+
+/* section 4 */
+#section4 {
+    background-image: url("../../images/main/section04/section04_main.webp");
+    /*height: 1200px;*/
+    height: 48.5vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+}
+
+#section4 .left-line {
+    position: absolute;
+    top: 0%;
+    left: 6%;
+}
+
+#section4 .right-line {
+    position: absolute;
+    top: 13%;
+    right: 7%;
+}
+
+#section4 .satellite {
+    position: absolute;
+    left: 16%;
+    top: 12%;
+}
+
+#section4 .cctv {
+    position: absolute;
+    right: 16%;
+    top: 18%;
+}
+
+#section4 .busan {
+    position: absolute;
+    bottom: 0%;
+    right: 9%;
+}
+
+#section4 .satellite img{
+    height: 5.5vw;
+}
+
+#section4 .cctv img{
+    height: 6vw;
+}
+
+#section4 .busan img{
+    height: 15.5vw;
+}
+/* section 4 끝 */
+
+.line-content {
+    display: flex;
+    flex-direction: column;
+    height: 18em;
+    justify-content: center;
+}
+
+.line-left {
+    display: flex;
+    justify-content: flex-start;
+    padding: 50px 0 50px 20px;
+    margin-left: 120px;
+
+}
+
+.line-right {
+    display: flex;
+    justify-content: flex-end;
+    padding: 50px 0 50px 20px;
+    margin-right: 120px;
+}
+
+/* section 2 3 4 끝 */
+
+/* section 2 */
+.num {
+    font-size: 3vw;
+    background-image: linear-gradient(to right, #ff5101, #ffc565);
+    -webkit-background-clip: text;
+    color: transparent;
+
+}
+
+.count {
+    top: 32.8%;
+    left: 19%;
+    position: absolute;
+}
+
+.main-section {
+    height: 50vw;
+    margin: 90px 2.2vw 0 2.2vw;
+    border-radius: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.section {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* busan split */
+/*
+.main-busan-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    z-index: 5;
+    background: rgba(211,211,211,0.83);
+}
+
+.main-busan-container-before{
+    width: 30%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.main-busan-container-before-01{
+    transform: rotate(-10deg);
+    left: 23%;
+    top: 5%;
+}
+
+.main-busan-container-before-02{
+    z-index: 10;
+    transform: rotate(-10deg);
+}
+
+.main-busan-container-before-03{
+    transform : translate(-37%, -44%) rotate(-10deg);
+}
+
+.main-busan-container-after{
+    position: absolute;
+    z-index: 11;
+    width: 30%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.main-busan-container-after-01{
+    transform: rotate(54deg) skew(24deg, -9deg);
+    left: 7%;
+    top: 28%;
+}
+
+.main-busan-container-after-02{
+    transform: rotate(55deg);
+    left: 17%;
+    top: -16%;
+}
+.main-busan-container-after-03{
+    transform: rotate(-19deg);
+    left: 66%;
+    top : 1%;
+}
+
+.main-busan-container-after .main-busan-img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+*/
+
+
+/* 반응형 */
+
+@media screen and (min-width:600px) and (max-width:1400px) {
+
+    .main-section {
+        margin-top: 70px;
+    }
+}
+
+
+@media screen and (max-width:600px) and (orientation: portrait){
+
+    .main-section {
+        margin-top: 70px;
+    }
+
+    .people-content,
+    .satellite-content,
+    .ship-content,
+    .mountain-content,
+    .trash-content
+    {
+        top: 50%;
+        right: 50%;
+        left: 0;
+        bottom: 0;
+        transform: translate(42%, -50%);
+    }
+
+    .people-msg {
+        height: 30vw;
+        width: 60vw;
+        background-image: url(../../images/main/text_collection.webp);
+        background-repeat: no-repeat;
+        background-size: 109vw 88vw;
+        background-position: 2.089% 47.624%;
+
+    }
+    .satellite-msg {
+        height: 30vw;
+        width: 60vw;
+        background-image: url(../../images/main/text_collection.webp);
+        background-repeat: no-repeat;
+        background-size: 112vw 92vw;
+        background-position: 2.089% 0.756%;
+    }
+
+    .ship-msg {
+        height: 30vw;
+        width: 60vw;
+        background-image: url(../../images/main/text_collection.webp);
+        background-repeat: no-repeat;
+        background-size: 136vw 85vw;
+        background-position: 0.723% 98.926%;
+    }
+
+    .mountain-msg {
+        height: 30vw;
+        width: 60vw;
+        background-image: url(../../images/main/text_collection.webp);
+        background-repeat: no-repeat;
+        background-size: 135vw 89vw;
+        background-position: 99.226% 0.791%;
+    }
+
+    .trash-msg {
+        height: 30vw;
+        width: 60vw;
+        background-image: url(../../images/main/text_collection.webp);
+        background-repeat: no-repeat;
+        background-size: 136vw 89vw;
+        background-position: 79.814% 98.926%;
+    }
+
+    #people-close {
+        right: -23%;
+        top: 3%;
+    }
+
+    #satellite-close {
+        top: -1%;
+        right: -25%;
+    }
+
+    #mountain-close {
+        right: -23%;
+        top: -3%;
+    }
+
+    #ship-close {
+        right: -23%;
+        top: 0%;
+    }
+
+    #trash-close {
+        right: -24%;
+        top: -5%;
+        position: absolute;
+    }
+
+    /* section2 */
+    #section2 {
+        background-image: url("../../images/main/section02/section02_main_mobile.webp");
+        height: 127.5vw;
+        margin-top: 15px;
+    }
+
+    .num {
+        font-size: 5.5vw;
+    }
+
+    .count {
+        top: 29.53%;
+        left: 11%;
+    }
+
+    #section2 .left-line {
+        top: -1.4%;
+        left: 0%;
+    }
+
+    #section2 .right-line {
+        right: -1%;
+        top: 12%;
+    }
+
+    #section2 .cctv01 {
+        left: 10.5%;
+        top: 70.5%;
+    }
+
+    #section2 .cctv02 {
+        left: 10.5%;
+        top: 80%;
+    }
+
+    #section2 .dron {
+        top: 74%;
+        right: 14%;
+    }
+
+    /* section2 끝*/
+
+    /* section3 */
+    #section3 {
+        background-image: url("../../images/main/section03/section03_main_mobile.webp");
+        height: 123.5vw;
+        margin-top: 15px;
+    }
+
+    #section3 .left-line {
+        top: -1%;
+        left: 0%;
+    }
+
+    #section3 .right-line {
+        top: 11.5%;
+        right: 0%;
+    }
+
+    #section3 .left-line img,
+    #section3 .right-line img {
+        width: 21vw;
+    }
+
+    #section3 .satellite {
+        top: 29%;
+        left: 12%;
+    }
+
+    #section3 .magnifier {
+        top: 35%;
+        left: 39%;
+    }
+
+    #section3 .message {
+        right: 12%;
+        top: 76%;
+    }
+    /* section3 끝 */
+
+    /* section4 */
+    #section4 {
+        background-image: url("../../images/main/section04/section04_main_mobile.webp");
+        height: 123vw;
+        margin-top: 15px;
+    }
+
+    #section4 .left-line {
+        top: -1.4%;
+        left: 0%;
+    }
+
+    #section4 .right-line {
+        right: 0%;
+        top: 12%;
+    }
+
+    #section4 .left-line img,
+    #section4 .right-line img {
+        width: 21vw;
+    }
+
+    #section4 .satellite {
+        left: 3%;
+        top: 16%;
+    }
+
+    #section4 .cctv {
+        right: 0%;
+        top: 16%;
+    }
+
+    #section4 .busan {
+        bottom: 4%;
+        right: 4%;
+    }
+
+    #section4 .satellite img {
+        height: 8.5vw;
+    }
+    #section4 .cctv img {
+        height: 10vw;
+    }
+    #section4 .busan img {
+        height: 17.5vw;
+    }
+
+    /* section4 끝 */
+}
+/* 반응형 끝*/

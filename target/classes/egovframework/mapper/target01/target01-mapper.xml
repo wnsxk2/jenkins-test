@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.busan.smartvillage.target01.mapper.Target01Mapper">
+
+    <resultMap id="CCTVShotInfoListMap" type="CCTVShotInfoVO">
+        <result column="date" property="date" />
+        <result column="month" property="month" />
+        <result column="file_type" property="fileType" />
+        <result column="file_path" property="filePath" />
+        <result column="float_debris_area" property="floatDebrisArea" />
+        <result column="float_debris_weight" property="floatDebrisWeight" />
+        <result column="float_debris_volume" property="floatDebrisVolume" />
+    </resultMap>
+
+    <resultMap id="BizInfoListMap" type="BizInfoVO">
+        <result column="year" property="bizYear" />
+        <result column="budget" property="bizBudget" />
+        <result column="weight" property="bizWeight" />
+    </resultMap>
+
+    <resultMap id="WaterLvlInfoListMap" type="WaterLvlVO">
+        <result column="water_level_month" property="waterLevelMonth" />
+        <result column="water_level" property="waterLevel" />
+        <result column="debris_weight" property="debrisWeight" />
+    </resultMap>
+
+    <resultMap id="WrnInfoListMap" type="WrnInfoVO">
+        <constructor>
+            <arg column="month" javaType="string"/>
+<!--            <arg column="start_time" javaType="string"/>-->
+<!--            <arg column="end_time" javaType="String"/>-->
+            <arg column="count" javaType="_int"/>
+            <arg column="type_name" javaType="string"/>
+            <arg column="level_name" javaType="String"/>
+        </constructor>
+    </resultMap>
+
+    <resultMap id="selectCCTVFileListMap" type="GeoStructure">
+        <result column="geom" property="geom"/>
+        <collection property="properties" ofType="CCTVInfoVO">
+            <constructor>
+                <idArg column="cctvId" javaType="string"/>
+                <arg column="cctvName" javaType="string"/>
+                <arg column="totalActive" javaType="_int"/>
+                <arg column="totalArea" javaType="_double"/>
+                <arg column="totalWeight" javaType="_double"/>
+                <arg column="totalVolume" javaType="_double"/>
+            </constructor>
+            <collection property="cctvShotInfo" resultMap="CCTVShotInfoListMap" columnPrefix="cctv_shot_"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="selectCCTVChartDataListMap" type="CCTVInfoVO">
+        <constructor>
+            <idArg column="cctvId" javaType="string"/>
+<!--            <arg column="bizYear" javaType="string"/>-->
+<!--            <arg column="bizWeight" javaType="_double"/>-->
+<!--            <arg column="bizBudget" javaType="_int"/>-->
+        </constructor>
+        <collection property="bizInfo" resultMap="BizInfoListMap" columnPrefix="biz_"/>
+        <collection property="waterLvlInfo" resultMap="WaterLvlInfoListMap" columnPrefix="wl_"/>
+        <collection property="wrnInfo" resultMap="WrnInfoListMap" columnPrefix="wrn_"/>
+    </resultMap>
+
+<!--** 리빙프로젝트 resultMap 시작 (윤경)**-->
+    <resultMap id="LProjectResultMap" type="LProjectVO">
+        <result property="lpSeq" column="lpSeq"/>
+        <result property="sggId" column="sggId"/>
+        <result property="sggNm" column="sggNm"/>
+        <result property="emdId" column="emdId"/>
+        <result property="emdNm" column="emdNm"/>
+        <result property="lpNm" column="lpNm"/>
+        <result property="avataId" column="avataId"/>
+        <result property="avataNm" column="avataNm"/>
+        <result property="beginDate" column="beginDate"/>
+        <result property="endDate" column="endDate"/>
+        <result property="relateLink" column="relateLink"/>
+        <result property="openYN" column="openYN"/>
+        <result property="lpContent" column="lpContent"/>
+        <result property="thumbPath" column="thumbPath"/>
+        <result property="strgFileNm" column="strgFileNm"/>
+        <result property="userCount" column="userCount"/>
+        <result property="emdCenterGeom" column="emdCenterGeom"/>
+        <result property="accumUserCount" column="accumUserCount"/>
+        <result property="lPCount" column="lPCount"/>
+        <result property="ratioMonth" column="ratioMonth"/>
+     <collection property="activityVO" resultMap="ActivityProp" columnPrefix="act_"/>
+    </resultMap>
+
+    <resultMap id="ActivityProp" type="ActivityVO">
+        <result property="clctSeq" column="clctSeq"/>
+        <result property="clctTitle" column="clctTitle"/>
+        <result property="clctRegDate" column="clctRegDate"/>
+        <result property="clctClassification" column="clctClassification"/>
+        <result property="clctPositionGeom" column="clctPositionGeom"/>
+        <result property="clctTrashClassification" column="clctTrashClassification"/>
+        <result property="clctVolume" column="clctVolume"/>
+        <result property="pureContent" column="pureContent"/>
+        <result property="clctImgPath" column="clctImgPath"/>
+        <result property="clctOrgnFileNm" column="clctOrgnFileNm"/>
+        <result property="clctStrgFileNm" column="clctStrgFileNm"/>
+        <result property="clctCount" column="clctCount"/>
+        <result property="clctVolumeSum" column="clctVolumeSum"/>
+    </resultMap>
+    <!--** 리빙프로젝트 resultMap 끝 **-->
+
+    <resultMap id="selectAvgWlInfo" type="WaterLvlVO">
+        <result property="waterLevel" column="waterLevel"/>
+        <result property="waterLevelMonth" column="waterLevelMonth"/>
+    </resultMap>
+
+    <resultMap id="selectAvgDebrisInfo" type="SatelVO">
+        <result property="ddWeight" column="ddWeight"/>
+        <result property="shotDt" column="shotDt"/>
+    </resultMap>
+
+    <!--** 리빙프로젝트 쿼리 시작 (윤경)**-->
+    <select id="selectEmdList" resultType="EmdDataVO">
+        SELECT emd.emd_id as emdId
+             , emd.sgg_id as sggId
+             , sgg.ADMDST_NM as sggNm
+             , sgg.ENG_ADMDST_NM as engSggNm
+             , emd.ADMDST_NM as emdNm
+             , emd.ENG_ADMDST_NM as engEmdNm
+        FROM temd AS emd
+                 JOIN TSGG AS SGG
+                      ON emd.SGG_ID = sgg.SGG_ID
+                 JOIN TCTPV AS CTPV
+                      ON sgg.CTPV_ID = CTPV.CTPV_ID
+        WHERE  CTPV.CTPV_ID ='ADMDST00000021';
+    </select>
+
+
+    <select id="insertLProject" parameterType="LProjectVO">
+        -- 첫 번째 테이블에 데이터 삽입 및 삽입된 lp_seq 반환
+        WITH inserted_info AS (
+        INSERT INTO TLPROJECT_INFO (
+            SGG_ID,
+            EMD_ID,
+            LP_NM,
+            BNGN_YMD,
+            END_YMD,
+            RLTD_LINK,
+            OPEN_YN,
+            LP_CN,
+            THUMB_PATH,
+            ORGNFL_NM,
+            STRG_FILE_NM
+        )
+        VALUES (
+            #{sggId},
+            #{emdId},
+            #{lpNm},
+            TO_TIMESTAMP(#{beginDate}, 'YYYY-MM-DD HH24:MI:SS'),
+            TO_TIMESTAMP(#{endDate}, 'YYYY-MM-DD HH24:MI:SS'),
+            #{relateLink},
+            #{openYN},
+            #{lpContent},
+            #{thumbPath},
+            #{orgnFileNm},
+            #{strgFileNm}
+            )
+            RETURNING lp_seq
+            )
+-- 반환된 lp_seq를 사용하여 두 번째 테이블에 데이터 삽입
+        INSERT INTO TLPROJECT_MEMBER (
+            lp_seq,
+            mbr_num,
+            avata_id,
+            rcpt_dt,
+            aprv_yn,
+            aprv_dt
+        )
+        SELECT
+            lp_seq,
+            #{mbrNum},
+            #{avataId},
+            TO_TIMESTAMP(#{receiptDate}, 'YYYY-MM-DD HH24:MI:SS'),
+            #{approvalYN},
+            now()
+        FROM inserted_info;
+
+    </select>
+
+    <!-- 리빙프로젝트 목록 불러오기 -->
+    <select id="selectLProjectList" resultType="LProjectVO">
+        SELECT  lpinfo.LP_SEQ as lpSeq
+                 ,lpinfo.SGG_ID as sggId
+                 ,lpinfo.EMD_ID as emdId
+                 ,lpinfo.LP_NM as lpNm
+                 ,lpmem.AVATA_ID as avataId
+                 ,avata.NICK_NM as avataNm
+                 ,TO_CHAR(lpinfo.BNGN_YMD, 'YYYY-MM-DD') as beginDate
+                 ,TO_CHAR(lpinfo.END_YMD, 'YYYY-MM-DD') as endDate
+                 ,lpinfo.RLTD_LINK as relateLink
+                 ,lpinfo.OPEN_YN as openYN
+                 ,lpinfo.LP_CN as lpContent
+                 ,lpinfo.THUMB_PATH as thumbPath
+                 ,lpinfo.STRG_FILE_NM as strgFileNm
+                 ,TO_CHAR(lpinfo.CRT_YMD, 'YYYY-MM-DD HH24:MI:SS') as createDt
+        FROM TLPROJECT_INFO  AS lpinfo
+                 JOIN TLPROJECT_MEMBER AS lpmem
+                    ON lpinfo.LP_SEQ = lpmem.LP_SEQ
+                JOIN TAVATAR AS avata
+                    ON lpmem.AVATA_ID = avata.AVATA_ID
+        WHERE lpmem.MBR_NUM = 1
+        ORDER BY lpinfo.CRT_YMD DESC
+    </select>
+
+ <!-- 리빙 프로젝트 상세 페이지 조회 -->
+    <select id="selectLProjectDetail" resultMap="LProjectResultMap" parameterType="map">
+        SELECT
+            lpinfo.LP_SEQ as lpSeq,
+            lpinfo.SGG_ID as sggId,
+            sgg.ADMDST_NM as sggNm,
+            lpinfo.EMD_ID as emdId,
+            emd.ADMDST_NM as emdNm,
+            ST_AsText(ST_Transform(ST_Centroid(emd.geom), 3857)) as emdCenterGeom,
+            lpinfo.LP_NM as lpNm,
+            lpmem.AVATA_ID as avataId,
+            avata.NICK_NM as avataNm,
+            TO_CHAR(lpinfo.BNGN_YMD, 'YYYY-MM-DD') as beginDate,
+            TO_CHAR(lpinfo.END_YMD, 'YYYY-MM-DD') as endDate,
+            lpinfo.RLTD_LINK as relateLink,
+            lpinfo.OPEN_YN as openYN,
+            lpinfo.LP_CN as lpContent,
+            lpinfo.THUMB_PATH as thumbPath,
+            lpinfo.STRG_FILE_NM as strgFileNm,
+            (SELECT COUNT(lp_seq) FROM tlproject_member WHERE LP_SEQ = #{index}) AS userCount,
+            act.clct_seq as act_clctSeq,
+     /*       act.mbr_num ,*/
+            act.clct_ttl as act_clctTitle,
+            act.clct_reg_ymd as act_clctRegDate,
+            act.clct_clsf as act_clctClassification,
+            ST_AsText(ST_Transform(act.clct_pstn, 3857)) as act_clctPositionGeom,
+            act.clct_trash_clsf as act_clctTrashClassification,
+            act.clct_vol as act_clctVolume,
+            act.pure_cn as act_pureContent,
+            act.clct_img_path as act_clctImgPath,
+            act.orgnfl_nm as act_clctOrgnFileNm,
+            act.strg_file_nm as act_clctStrgFileNm
+        FROM
+            TLPROJECT_INFO AS lpinfo
+                JOIN
+            TLPROJECT_MEMBER AS lpmem ON lpinfo.LP_SEQ = lpmem.LP_SEQ
+                JOIN
+            TAVATAR AS avata ON lpmem.AVATA_ID = avata.AVATA_ID
+                JOIN
+            TSGG AS sgg ON lpinfo.SGG_ID = sgg.SGG_ID
+                JOIN
+            TEMD AS emd ON lpinfo.EMD_ID = emd.EMD_ID
+                LEFT JOIN
+            TCLCT_ACTIVITY AS act ON lpinfo.LP_SEQ = act.LP_SEQ AND lpmem.MBR_NUM = act.MBR_NUM
+        WHERE
+            lpmem.LP_SEQ = #{index}
+    </select>
+
+    <!--해양쓰레기 리빙프로젝트 통계 그래프(3개)-->
+    <select id="selectLProjectGraph" resultMap="LProjectResultMap" >
+        WITH months AS (
+        SELECT DATE_TRUNC('month', CURRENT_DATE - INTERVAL '6 months' + INTERVAL '1 month' * s) AS month
+        FROM generate_series(0, 5) AS s
+        )
+        SELECT
+        TO_CHAR(months.month, 'YYYY-MM') AS ratioMonth,
+        COALESCE(avata.unique_avata_count, 0) AS accumUserCount,
+        COALESCE(lp.lp_seq_count, 0) AS lPCount,
+        COALESCE(t.clctCount, 0) AS act_clctCount,
+        COALESCE(t.clctVolumeSum, 0) AS act_clctVolumeSum
+        FROM
+        months
+        LEFT JOIN
+        (
+        SELECT
+        DATE_TRUNC('month', aprv_dt) AS month,
+        COUNT(DISTINCT avata_id) AS unique_avata_count
+        FROM
+        tlproject_member
+        WHERE
+        aprv_dt <![CDATA[>=]]> DATE_TRUNC('month', CURRENT_DATE - INTERVAL '6 months')
+        AND aprv_dt <![CDATA[<]]> DATE_TRUNC('month', CURRENT_DATE)
+        GROUP BY
+        DATE_TRUNC('month', aprv_dt)
+        ) AS avata
+        ON
+        months.month = avata.month
+        LEFT JOIN
+        (
+        SELECT
+        DATE_TRUNC('month', crt_ymd) AS month,
+        COUNT(lp_seq) AS lp_seq_count
+        FROM
+        public.tlproject_info
+        WHERE
+        crt_ymd <![CDATA[>=]]> DATE_TRUNC('month', CURRENT_DATE - INTERVAL '6 months')
+        AND crt_ymd <![CDATA[<]]> DATE_TRUNC('month', CURRENT_DATE)
+        GROUP BY
+        DATE_TRUNC('month', crt_ymd)
+        ) AS lp
+        ON
+        months.month = lp.month
+        LEFT JOIN
+        (
+        SELECT
+        DATE_TRUNC('month', CLCT_REG_YMD) AS month,
+        COUNT(CLCT_SEQ) AS clctCount,
+        SUM(clct_vol) AS clctVolumeSum
+        FROM
+        TCLCT_ACTIVITY
+        WHERE
+        CLCT_REG_YMD <![CDATA[>=]]> DATE_TRUNC('month', CURRENT_DATE - INTERVAL '6 months')
+        AND CLCT_REG_YMD <![CDATA[<]]> DATE_TRUNC('month', CURRENT_DATE)
+        GROUP BY
+        DATE_TRUNC('month', CLCT_REG_YMD)
+        ) AS t
+        ON
+        months.month = t.month
+        ORDER BY
+        months.month;
+
+    </select>
+
+    <!--해양쓰레기 수거량 그래프-->
+    <select id="selectActivityCount" resultType="ActivityVO" parameterType="map">
+        WITH months AS (
+        SELECT DATE_TRUNC('month', CURRENT_DATE - INTERVAL '6 months' + INTERVAL '1 month' * s) AS ratioMonth
+        FROM generate_series(0, 5) AS s
+        )
+        SELECT
+        TO_CHAR(months.ratioMonth, 'YYYY-MM') AS ratioMonth,
+        COALESCE(SUM(t.clct_vol), 0) AS clctVolumeSum
+        FROM
+        months
+        LEFT JOIN
+        TCLCT_ACTIVITY t
+        ON DATE_TRUNC('month', t.CLCT_REG_YMD) = months.ratioMonth
+        AND t.CLCT_REG_YMD <![CDATA[>=]]> DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '6 months'
+        AND t.CLCT_REG_YMD <![CDATA[<]]> DATE_TRUNC('month', CURRENT_DATE)
+        AND t.LP_SEQ = #{index}
+        GROUP BY
+        months.ratioMonth
+        ORDER BY
+        months.ratioMonth
+    </select>
+
+<!--검색-->
+    <select id="searchLProject" resultType="LProjectVO" parameterType="map">
+        SELECT  lpinfo.LP_SEQ as lpSeq
+             ,lpinfo.SGG_ID as sggId
+             ,lpinfo.EMD_ID as emdId
+             ,lpinfo.LP_NM as lpNm
+             ,lpmem.AVATA_ID as avataId
+             ,avata.NICK_NM as avataNm
+             ,TO_CHAR(lpinfo.BNGN_YMD, 'YYYY-MM-DD') as beginDate
+             ,TO_CHAR(lpinfo.END_YMD, 'YYYY-MM-DD') as endDate
+             ,lpinfo.RLTD_LINK as relateLink
+             ,lpinfo.OPEN_YN as openYN
+             ,lpinfo.LP_CN as lpContent
+             ,lpinfo.THUMB_PATH as thumbPath
+             ,lpinfo.STRG_FILE_NM as strgFileNm
+             ,TO_CHAR(lpinfo.CRT_YMD, 'YYYY-MM-DD HH24:MI:SS') as createDt
+        FROM TLPROJECT_INFO  AS lpinfo
+                 JOIN TLPROJECT_MEMBER AS lpmem
+                      ON lpinfo.LP_SEQ = lpmem.LP_SEQ
+                 JOIN TAVATAR AS avata
+                      ON lpmem.AVATA_ID = avata.AVATA_ID
+        WHERE lpmem.MBR_NUM = 1
+        <if test="lpNm != null and lpNm != ''"> <!--프로젝트명-->
+            AND lpinfo.LP_NM LIKE CONCAT('%' || #{lpNm} || '%')
+        </if>
+        <if test="lpContent != null and lpContent != ''"> <!--키워드(프로젝트 소개)-->
+            AND lpinfo.LP_CN LIKE CONCAT('%' || #{lpContent} || '%')
+        </if>
+        <if test="sggIdList != null and sggIdList.size > 0">
+            AND lpinfo.SGG_ID IN
+            <foreach item="sggId" index="index" collection="sggIdList" open="(" separator="," close=")">
+                #{sggId}
+            </foreach>
+        </if>
+        <if test="lPStatus != null and lPStatus != ''">
+            <choose>
+                <when test="lPStatus == 'lPStatus01'">
+                    AND TO_CHAR(lpinfo.BNGN_YMD, 'YYYY-MM-DD') <![CDATA[<=]]> #{currentDt}
+                    AND TO_CHAR(lpinfo.END_YMD, 'YYYY-MM-DD') IS NULL
+                </when>
+                <when test="lPStatus == 'lPStatus02'">
+                    AND TO_CHAR(lpinfo.BNGN_YMD, 'YYYY-MM-DD') <![CDATA[<=]]> #{currentDt}
+                    AND TO_CHAR(lpinfo.END_YMD, 'YYYY-MM-DD') <![CDATA[<=]]> #{currentDt}
+                </when>
+                <when test="lPStatus == 'lPStatus03'">
+                    AND TO_CHAR(lpinfo.BNGN_YMD, 'YYYY-MM-DD') <![CDATA[>]]> #{currentDt}
+                    AND TO_CHAR(lpinfo.END_YMD, 'YYYY-MM-DD') IS NULL
+                </when>
+            </choose>
+        </if>
+        ORDER BY lpmem.aprv_dt
+    </select>
+    <!--** 리빙프로젝트 쿼리 끝 **-->
+
+    <!--** 재해쓰레기 쿼리 시작 (세영) **-->
+<!--재해쓰레기 추정량 -->
+    <select id="selectSatelInfoList" resultType="SatelVO" parameterType="map">
+        SELECT debrisinfo.DD_AREA as ddArea
+             , debrisinfo.DD_WEIGHT as ddWeight
+             , to_char(shotinfo.SHOT_DT, 'YYYY-MM-DD HH:MI:SS') as shotDt
+             , fileinfo.SATEL_FILE_PATH as satelFilePath
+        FROM TDISASTER_DEBRIS_INFO as debrisinfo
+                 JOIN TSATEL_SHOT_INFO as shotinfo
+                      ON debrisinfo.SATEL_ID = shotinfo.SATEL_ID
+                 JOIN tsatel_file_info as fileinfo
+                      ON shotinfo.SATEL_ID =  fileinfo.SATEL_ID
+        WHERE TO_CHAR(shotinfo.SHOT_DT, 'YYYY-MM-DD') = (SELECT TO_CHAR(MAX(SHOT_DT), 'YYYY-MM-DD')
+                                                         FROM TSATEL_SHOT_INFO
+                                                         WHERE TO_CHAR(SHOT_DT, 'YYYY-MM') BETWEEN #{startDate} AND #{endDate})
+        ORDER BY shotinfo.shot_dt DESC
+            LIMIT 1;
+    </select>
+
+<!--인공위성 이미지-->
+    <select id="getSatelImage" resultType="SatelVO" parameterType="map">
+        SELECT debrisinfo.DD_AREA as ddArea
+             , debrisinfo.DD_WEIGHT as ddWeight
+             , to_char(shotinfo.SHOT_DT, 'YYYY-MM-DD HH:MI:SS') as shotDt
+             , debrisinfo.SATEL_ID
+        FROM TDISASTER_DEBRIS_INFO as debrisinfo
+                 JOIN TSATEL_SHOT_INFO as shotinfo
+                      ON debrisinfo.SATEL_ID = shotinfo.SATEL_ID
+        WHERE TO_CHAR(shotinfo.SHOT_DT, 'YYYY-MM-DD') = (SELECT TO_CHAR(MAX(SHOT_DT), 'YYYY-MM-DD')
+                                                         FROM TSATEL_SHOT_INFO
+                                                         WHERE TO_CHAR(SHOT_DT, 'YYYY-MM') BETWEEN #{startDate} AND #{endDate})
+        ORDER BY shotinfo.shot_dt DESC
+    </select>
+
+<!-- 월평균 수위 -->
+    <select id="selectAvgWlInfo" resultType="WaterLvlVO" parameterType="map">
+        SELECT AVG(WL)                     as waterLevel
+             , TO_CHAR(OBS_YMD, 'YYYY-MM') as waterLevelMonth
+        FROM TWL_INFO
+        WHERE TO_CHAR(OBS_YMD, 'YYYY-MM') BETWEEN #{startDate} AND #{endDate}
+        GROUP BY to_char(OBS_YMD, 'YYYY-MM')
+    </select>
+
+<!-- 월평균 재해쓰레기 -->
+    <select id="selectAvgDebrisInfo" resultType="SatelVO" parameterType="map">
+        SELECT AVG(DD_WEIGHT) as ddWeight
+             , to_char(shot.SHOT_DT, 'YYYY-MM') as shotDt
+        FROM tdisaster_debris_info as debris
+                 JOIN tsatel_shot_info as shot
+                      ON debris.SATEL_ID = shot.SATEL_ID
+        WHERE TO_CHAR(shot.SHOT_DT, 'YYYY-MM') BETWEEN #{startDate} AND #{endDate}
+        GROUP BY to_char(shot.SHOT_DT, 'YYYY-MM')
+    </select>
+    <!--** 재해쓰레기 쿼리 끝 **-->
+
+    <!--** 부유쓰레기 쿼리 시작  **-->
+    <select id="selectCCTVFileList" parameterType="map" resultMap="selectCCTVFileListMap">
+        WITH fd_table AS (
+            SELECT
+                csi.cctv_id                                                                                             AS cctv_id
+                , csi.shot_dt                                                                                           AS shot_dt
+                , csi.cctv_shot_num															                            AS cctv_shot_num
+                , fdi.fd_area                                                                                           AS fd_area
+                , fdi.fd_weight                                                                                         AS fd_weight
+                , fdi.fd_vol                                                                                            AS fd_volume
+                , row_number() over(PARTITION BY csi.cctv_id, to_char(csi.shot_dt, 'yyyyMM') ORDER BY fdi.fd_area desc) AS rn
+            FROM tcctv_shot_info csi
+            JOIN tfloat_debris_info fdi
+                ON fdi.cctv_id = csi.cctv_id
+                AND fdi.cctv_shot_num = csi.cctv_shot_num
+            WHERE csi.shot_dt
+                BETWEEN #{startDate}::timestamp AND #{endDate}::timestamp
+        ),
+        total_table AS (
+            SELECT
+                (SELECT count(cctv_stts)
+                 FROM (
+                          SELECT
+                              ROW_NUMBER() over(PARTITION BY cctv_id ORDER BY srch_dt desc) AS rn
+                            , tsh.cctv_stts
+                          FROM tcctv_stts_hstry tsh
+                          WHERE tsh.srch_dt <![CDATA[<=]]> now()
+                      ) rn
+                 WHERE rn.rn = 1 AND rn.cctv_stts = 'enable')                                                           AS total_active
+                , ci.cctv_id                                                                                            AS cctv_id
+                , ci.cctv_nm                                                                                            AS cctv_nm
+                , ci.cctv_pstn                                                                                          AS cctv_pstn
+                , sum(fdi.fd_area)                                                                                      AS total_area
+                , sum(fdi.fd_vol)                                                                                       AS total_volume
+                , sum(fdi.fd_weight)                                                                                    AS total_weight
+            FROM tcctv_info ci
+            JOIN tcctv_shot_info csi
+                ON csi.cctv_id = ci.cctv_id
+            JOIN tfloat_debris_info fdi
+                ON fdi.cctv_id = csi.cctv_id
+                AND fdi.cctv_shot_num = csi.cctv_shot_num
+            WHERE csi.shot_dt
+                BETWEEN #{startDate}::timestamp AND #{endDate}::timestamp
+            GROUP BY ci.cctv_id
+        )
+        SELECT
+            ft.cctv_id                                                                                                  AS cctvId
+            , tt.cctv_nm                                                                                                AS cctvName
+            , ST_ASTEXT(ST_TRANSFORM(tt.cctv_pstn, 3857))                                                               AS geom
+            , tt.total_active                                                                                           AS totalActive
+            , tt.total_area                                                                                             AS totalArea
+            , tt.total_weight                                                                                           AS totalWeight
+            , tt.total_volume                                                                                           AS totalVolume
+            , ft.shot_dt                                                                                                AS cctv_shot_date
+            , cfi.cctv_file_type                                                                                        AS cctv_shot_file_type
+            , cfi.cctv_file_path                                                                                        AS cctv_shot_file_path
+        FROM fd_table ft
+        JOIN tcctv_file_info cfi
+            ON cfi.cctv_id = ft.cctv_id
+            AND cfi.cctv_shot_num = ft.cctv_shot_num
+        JOIN total_table tt
+            ON tt.cctv_id = ft.cctv_id
+        WHERE ft.rn IN (1)-- 조회 달이 3개월이면 1만 검색
+        <if test='!cctvId.equals("all")'>
+            AND ft.cctv_id IN(#{cctvId})
+        </if>
+
+    </select>
+    <select id="selectCCTVChartDataList" parameterType="map" resultMap="selectCCTVChartDataListMap">
+        WITH fd_by_year AS (
+            SELECT
+                ci.cctv_id
+                 , ci.emd_id
+                 , to_char(csi.shot_dt, 'yyyy')                     AS fd_year
+                 , sum(fdi.fd_weight)                               AS fd_weight
+            FROM tcctv_info ci
+                JOIN tcctv_shot_info csi
+                    ON csi.cctv_id = ci.cctv_id
+                JOIN tfloat_debris_info fdi
+                    ON fdi.cctv_id = csi.cctv_id
+                AND fdi.cctv_shot_num = csi.cctv_shot_num
+            WHERE csi.shot_dt
+                BETWEEN date_trunc('year', #{endDate}::timestamp) - INTERVAL '2 years'
+                AND date_trunc('year', #{endDate}::timestamp) + INTERVAL '1 year'
+            GROUP BY ci.cctv_id, to_char(csi.shot_dt, 'yyyy')
+        ),
+        biz_by_year AS (
+            SELECT
+                emd_id
+                , to_char(biz_bgng_ymd, 'yyyy')                     AS biz_year
+                , sum(biz_req_amt)                                  AS biz_req_amt
+            FROM tbiz_amt ta
+            WHERE biz_bgng_ymd
+                BETWEEN date_trunc('year', #{endDate}::timestamp) - INTERVAL '2 years'
+                AND date_trunc('year', #{endDate}::timestamp) + INTERVAL '1 year'
+            GROUP BY emd_id, to_char(biz_bgng_ymd, 'yyyy')
+        ),
+        wrn_by_month AS (
+            SELECT
+                wh.sgg_id
+                , cwt.wrn_tp_cd_nm                                  AS wrn_cd_nm
+                , cwl.wrn_lvl_nm                                    AS wrn_lvl
+                , to_char(wh.tm_in, 'yyyyMM')                       AS wrn_month
+                , count(cwt.wrn_tp_cd_nm)                           AS wrn_count
+            FROM twrn_hstry wh
+                LEFT JOIN cd_wrn_tp cwt
+            ON cwt.wrn_tp_cd = wh.wrn_tp_cd
+                LEFT JOIN cd_wrn_lvl cwl
+                ON cwl.wrn_lvl_id = wh.wrn_lvl_id
+            WHERE wh.wrn_tp_cd IN ('2', '7')
+                AND
+                    (wh.tm_in BETWEEN #{startDate}::timestamp AND #{endDate}::timestamp
+                    OR wh.reg_sp BETWEEN #{startDate}::timestamp AND #{endDate}::timestamp)
+            GROUP BY wh.sgg_id, cwt.wrn_tp_cd_nm, cwl.wrn_lvl_nm, to_char(wh.tm_in, 'yyyyMM')
+        ),
+        fd_by_month AS (
+            SELECT
+                ci.cctv_id                                          AS cctv_id
+                , to_char(csi.shot_dt, 'yyyyMM')                    AS shot_month
+                , sum(fdi.fd_area)                                  AS fd_area
+                , sum(fdi.fd_vol)                                   AS fd_vol
+                , sum(fdi.fd_weight)                                AS fd_weight
+            FROM tcctv_info ci
+                JOIN tcctv_shot_info csi
+            ON csi.cctv_id = ci.cctv_id
+                JOIN tfloat_debris_info fdi
+                ON fdi.cctv_id = csi.cctv_id
+                AND fdi.cctv_shot_num = csi.cctv_shot_num
+            WHERE
+                csi.shot_dt BETWEEN #{startDate}::timestamp AND #{endDate}::timestamp
+            GROUP BY ci.cctv_id, to_char(csi.shot_dt, 'yyyyMM')
+        ),
+        wl_by_month AS (
+            SELECT
+                emd_id
+                , round(avg(wi.wl), 1)                                AS wl
+                , to_char(wi.obs_ymd, 'yyyyMM')                       AS wl_month
+            FROM twl_obsvtr_info woi
+            JOIN twl_info wi
+                ON wi.obsvtr_id = woi.obsvtr_id
+            WHERE wi.obs_ymd
+                BETWEEN #{startDate}::timestamp AND #{endDate}::timestamp
+            GROUP BY emd_id, to_char(wi.obs_ymd, 'yyyyMM')
+        )
+        SELECT
+            fdy.cctv_id                                               AS cctvId
+            , fdm.fd_weight                                           AS wl_debris_weight
+            , fdm.shot_month                                          AS wl_water_level_month
+            , wlm.wl                                                  AS wl_water_level
+            , fdm.shot_month                                          AS wrn_month
+            , COALESCE(wrm.wrn_cd_nm, '')                             AS wrn_type_name
+            , COALESCE(wrm.wrn_lvl, '')                               AS wrn_level_name
+            , COALESCE(wrm.wrn_count, 0)                              AS wrn_count
+            , fdy.fd_year                                             AS biz_year
+            , fdy.fd_weight                                           AS biz_weight
+            , bizy.biz_req_amt                                        AS biz_budget
+        FROM fd_by_year fdy
+        LEFT JOIN biz_by_year bizy
+            ON bizy.emd_id = fdy.emd_id
+            AND bizy.biz_year = fdy.fd_year
+        JOIN temd
+            ON temd.emd_id = fdy.emd_id
+        LEFT JOIN fd_by_month fdm
+            ON fdm.cctv_id = fdy.cctv_id
+        LEFT JOIN wl_by_month wlm
+            ON wlm.wl_month = fdm.shot_month
+            AND wlm.emd_id = temd.emd_id
+        LEFT JOIN wrn_by_month wrm
+            ON wrm.sgg_id = temd.sgg_id
+            AND wrm.wrn_month = fdm.shot_month
+        <if test='!cctvId.equals("all")'>
+            WHERE fdm.cctv_id IN (#{cctvId})
+        </if>
+        ORDER BY wrn_month, biz_year
+        --WHERE fdm.cctv_id IN ('CCTV01')
+    </select>
+</mapper>

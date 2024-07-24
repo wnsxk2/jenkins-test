@@ -1,0 +1,1701 @@
+
+@import "../../node_modules/ol-ext/dist/ol-ext.min.css";
+
+/* 변수 선언 */
+/* 변수 선언 끝 */
+
+/* 배경 이미지 */
+main {
+    background-image: url('../../images/target02/main.webp');
+}
+/* 배경 이미지 끝 */
+
+table {
+    border-collapse : collapse;
+}
+
+th {
+    background: #f1e9e3;
+}
+
+/* side-section */
+
+/* 대시보드 */
+.side-section-port,
+.side-section-area,
+.side-section-galmaet {
+    display: none;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    max-height: 100%;
+    height: 100%;
+}
+
+.side-section-port.show,
+.side-section-area.show,
+.side-section-galmaet.show {
+    display: block;
+}
+/* 대시보드 커버 */
+
+.port-cover,
+.area-cover,
+.chart-cover,
+.galmaet-cover{
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.port-cover {
+    /*background-image: url(../../images/target02/side_section_cover_img_01.webp);*/
+    background-image: url(../../images/target02/img_port_cover.webp);
+}
+.area-cover {
+    /*background-image: url(../../images/target02/side_section_cover_img_02.webp);*/
+    background-image: url(../../images/target02/img_area_cover.webp);
+}
+.chart-cover {
+    /*background-image: url(../../images/target02/ship_ratio_cover_img.webp);*/
+    background-image: url(../../images/target02/img_chart_cover.webp);
+}
+.galmaet-cover {
+    /*background-image: url(../../images/target02/side_section_cover_img_03.webp);*/
+    background-image: url(../../images/target02/img_galmaetgil_cover.webp);
+}
+/* 대시보드 커버 끝 */
+
+/* 대시보드 끝 */
+
+/* 바다좋은 부산 */
+.side-section-page.show {
+    display: block;
+}
+
+.msrstn-section {
+    height: 28%;
+}
+
+.msrstn-table {
+    min-height: 130px;
+    height: 78%;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.forecast-section {
+    display: flex;
+    flex-direction: row;
+    max-height: 20%;
+    height: auto;
+    gap: 4px;
+}
+
+.forecast-index-section {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+}
+.dust-index-section {
+    border-radius: 8px;
+    border: 2px solid black;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forecast-index-section > div {
+    width: calc(50% - 2px);
+}
+
+.dust-index-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    flex: 2;
+}
+
+.dust-index-img {
+    width: 3vw;
+    flex: 1;
+}
+
+.dust-index-date {
+    font-size: var(--font-size-sm);
+}
+
+.dust-index {
+    font-size: calc(var(--font-size-md) * 1.3);
+}
+
+.dust-chart-section {
+    height: 50%;
+}
+
+.dust-chart-portrait {
+    height: 15vh;
+    width: 84.5vw
+}
+
+.dust-chart-table {
+    height: 85px;
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+}
+
+.total-chart-section {
+    /*height: 36%;*/
+    height: 29vh;
+}
+
+.total-chart {
+    /*height: calc(100% - 42px);*/
+    height: 22vh;
+    width: 548px;
+}
+
+.ship-chart-section {
+    /*height: 60%;*/
+    height: 49vh;
+}
+
+.ship-chart {
+    height: 42%;
+}
+
+.transport-chart-section {
+    height: 48%;
+    display: flex;
+}
+
+.transport-chart {
+    flex: 2;
+}
+
+.transport-table {
+    flex: 1;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.transport-table tr:nth-child(2) td:nth-child(1){
+    background: #5672c6;
+    color: white;
+}
+.transport-table tr:nth-child(3) td:nth-child(1){
+    background: #90c675;
+    color: white;
+}
+.transport-table tr:nth-child(4) td:nth-child(1){
+    background: #fac85a;
+    color: white;
+}
+.transport-table tr:nth-child(5) td:nth-child(1){
+    background: #ee6767;
+    color: white;
+}
+/* 바다좋은 부산 끝 */
+
+/* 살기좋은 부산 */
+.side-section-area .area-dash-section{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    height: 48%;
+}
+
+.side-section-area .forecast-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: none;
+}
+
+.side-section-area .area-index-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    margin-bottom: 0px;
+    justify-content: space-around;
+}
+
+.side-section-area .forecast-section .dash-section-title span {
+    font-size: calc(var(--font-size-md) * 0.875);
+}
+
+.side-section-area .yesterday-section {
+    margin-bottom: 8px;
+}
+
+.side-section-area .dust-index {
+    font-size: calc(var(--font-size-md) * 1.1);
+}
+
+.side-section-area .dust-index-date {
+    font-size: calc(var(--font-size-sm) * 7 / 8);
+}
+
+.side-section-area .area-forecast-section {
+    flex: 1;
+    padding: 8px;
+    margin-bottom: 0px;
+}
+/* 살기좋은 부산 끝 */
+
+/* 걷기좋은 부산 */
+.side-section-galmaet .galmaet-dash-section{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    height: 48%;
+}
+
+.side-section-galmaet .forecast-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: none;
+}
+
+.side-section-galmaet .galmaet-index-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    margin-bottom: 0px;
+    justify-content: space-around;
+}
+
+.side-section-galmaet .forecast-section .dash-section-title span {
+    font-size: calc(var(--font-size-md) * 0.875);
+}
+
+.side-section-galmaet .pm10-section {
+    margin-bottom: 8px;
+}
+
+.side-section-galmaet .dust-index {
+    font-size: calc(var(--font-size-md) * 1.1);
+}
+
+.side-section-galmaet .dust-index-date {
+    font-size: calc(var(--font-size-sm) * 6 / 8);
+}
+
+.side-section-galmaet .galmaet-aod-section {
+    flex: 1;
+    padding: 8px;
+    margin-bottom: 0px;
+}
+
+.side-section-galmaet .galmaet-info-section {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 42px);
+    gap: 4px;
+}
+
+.side-section-galmaet .galmaet-info-content{
+    flex: 1;
+    border: 1px solid #385723;
+    border-radius: 4px;
+    background: #f3fbf3;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.side-section-galmaet .galmaet-info-content span {
+    font-size: var(--font-size-md);
+}
+
+.side-section-galmaet .galmaet-content-section{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+}
+
+.side-section-galmaet .galmaet-lk-img {
+    width: 100%;
+    height: 100%;
+    padding: 4px;
+}
+
+.side-section-galmaet .galmaet-lk-name {
+    margin-bottom: 6px;
+    font-size: calc(var(--font-size-md) * 1.25);
+}
+
+.side-section-galmaet .galmaet-lk-content {
+    font-size: var(--font-size-md);
+    height: 100%;
+    overflow-y: scroll;
+    display: inline-block;
+}
+
+.galmaet-info-content .galmaet-lk-link {
+    margin-right: 10px;
+}
+
+.side-section-galmaet .galmaet-lk-section {
+    padding: 4px;
+    height: 35%;
+}
+
+.galmaet-lk-popup {
+    z-index: 9999;
+    width: 70vw;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 28px;
+    border: 1px solid lightgray;
+    padding: 18px;
+    display: none;
+}
+
+.galmaet-lk-popup.show {
+    display: block;
+}
+
+.galmaet-lk-close-btn {
+    width: 100%;
+    background: lightgray;
+    border: 1px solid lightgray;
+    border-radius: 8px;
+    margin-top: 4px;
+    color: black;
+}
+/* 걷기좋은 부산 끝 */
+
+/* side-section-cover */
+.side-section-cover {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: -6px;
+    z-index: 9999;
+    text-align: center;
+    font-size: calc(var(--font-size-lg) * 1.4);
+    padding-top: 20%;
+    border-bottom-left-radius: var(--side-section-radius);
+}
+
+.side-section-cover img{
+    width: 20vw;
+    height: 20vw;
+}
+
+.side-section-cover.hide,
+.transport-section-cover.hide {
+    display: none;
+}
+
+.transport-section-cover {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    text-align: center;
+    font-size: var(--font-size-lg);
+    padding-top: 5%;
+    border-radius: 8px;
+}
+
+.transport-section-cover img {
+    width: 16vw;
+    height: 16vw;
+}
+
+/* side-section-cover 끝 */
+/* side-section 끝 */
+
+/* 페이지 버튼 */
+.page-btn > img {
+    width: 20px;
+    height: 28px;
+}
+
+.page-btn:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.page-btn.prev {
+    position: absolute;
+    left: 0px;
+    top: 45%;
+    display: none;
+    border: none;
+    background: none;
+    z-index: 9998;
+}
+
+.page-btn.next {
+    position: absolute;
+    right: 0px;
+    top: 45%;
+    display: none;
+    border: none;
+    background: none;
+    z-index: 9998;
+}
+
+.page-btn.show {
+    display: inline-block;
+}
+/* 페이지 버튼 끝 */
+
+/* carousel */
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'><path d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/></svg>");
+}
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'><path d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/></svg>");
+}
+/* carousel 끝 */
+
+/*----------------------------- 주임님 코드 -------------------------------*/
+.target-board {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 632px;
+    height: 975px;
+    z-index: 1;
+    background-color: #fff;
+    /*padding: 10px;*/
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateX(calc(100% - 762px)) scaleX(0);
+    transform-origin: top right;
+    opacity: 0;
+}
+
+.target-board.active {
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translateX(0) scaleX(1);
+    opacity: 1;
+}
+
+
+.target-board-text {
+    font-size: 26px;
+    font-weight: bold;
+    background: #f2f2f2;
+    height: 27px;
+    padding: 17px;
+}
+
+.target-board-text span {
+    font-size: 20px;
+    color: #595959;
+}
+
+.target-board-date {
+    position: absolute;
+    right: 20px;
+    top: 9px;
+}
+
+
+.dust-btn-div {
+    position: absolute;
+    top: 0;
+    right: 4px;
+    z-index: 1;
+    padding: 10px;
+    transition: transform 0.5s ease;
+    transform: translateX(1px);
+}
+
+.dust-btn-div.active {
+    transition: transform 0.5s ease;
+    transform: translateX(-775px);
+    right: -148px;
+}
+
+
+.dust-btn {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    width: 197px;
+    height: 37px;
+    margin-bottom: 10px;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    color: #969696;
+}
+
+.dust-btn span {
+    position: absolute;
+    margin-left: 14px;
+    font-size: 17px;
+}
+
+
+.dust-btn img {
+    position: absolute;
+    left: 0;
+    margin-left: 8px;
+}
+
+.dust-btn:hover {
+    cursor: pointer;
+    background: #2f5597;
+    color: white;
+}
+
+.dust-btn.on {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dust-btn:focus {
+    background: #2f5597;
+    color: white;
+}
+
+.dust-board {
+    border: 1px solid #bfbfbf;
+    border-radius: 4px;
+    padding: 8px 10px 8px 10px;
+    width: 90%;
+    margin: 8px 16px 4px 32px
+}
+.side-section-area .dust-board,
+.side-section-galmaet .dust-board{
+    margin: 1vh 16px 0.5vh 32px;
+}
+
+.dust-board tr:first-child {
+    background: #f1e9e3;
+}
+
+.dust-board-content { /*내용*/
+    margin: 4px auto 0;
+    width: 546px;
+    text-align: center;
+}
+
+.dust-board-content th {
+    border: 1px solid #bfbfbf;
+}
+
+/* 갈맷길 표 */
+.galmaet-table {
+    margin: 9px auto 0;
+    width: 546px;
+}
+
+.galmaet-table th,
+.galmaet-table td {
+    border: 1px solid #bfbfbf;
+}
+
+.galmaet-table th{
+    background: #f1e9e3;
+}
+
+.galmaet-table td{
+    background: #ffffff;
+    padding-left: 12px
+}
+.galmaet-table tr:last-of-type{
+    height: 56px;
+}
+
+.galmaet-slider {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 8px 0 0 0;
+}
+
+.galmaet-slider img {
+    height: 34vh;
+    width: 542px;
+    border-radius: 4px;
+}
+
+.galmaet-slider span{
+    margin-top: 1vh;
+}
+
+.dust-board-01 {
+    text-align: center;
+}
+
+
+
+.dust-board-01 th:nth-child(1) {
+    width: 150px;
+}
+
+.dust-board-01 th:nth-child(2) {
+    width: 350px;
+}
+
+.dust-board-02 {
+    text-align: center;
+}
+
+.dust-board-02 img {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.dust-board-02 span {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 22px;
+    margin-left: 6px;
+}
+
+
+.dust-board-02 tr:first-child {
+    height: 42px;
+}
+
+.dust-board-02 tr:last-child {
+    height: 60px;
+}
+
+.dust-board-03 th {
+    width: 83px;
+    height: 33px;
+    text-align: center;
+}
+
+.dust-board-03 th:first-child {
+    width: 62px;
+}
+
+.dust-board-04 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid #bfbfbf;
+    border-radius: 10px;
+    width: 168px;
+    height: 136px;
+}
+
+.dust-board-04 img{
+    height: 72px;
+    width: 72px;
+}
+
+.dust-board-04 span:first-child{
+    font-size: 20px;
+}
+.dust-board-04 span:last-child{
+    font-size: 20px;
+}
+
+.vessel-list {
+    border: 1px solid transparent;
+    background: white;
+    width: 150px;
+    margin: -8px 0 5px 21px;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 0px;
+    visibility: hidden;
+    transition: height 0.3s, visibility 0.3s;
+
+    /* transition: transform 0.3s ease, opacity 0.3s ease;
+     transform: translateY(calc(100% - 100px)) scaleY(0);
+     transform-origin: top right;
+     opacity: 0;*/
+}
+
+.vessel-list.on {
+    height: 100px;
+    visibility: visible;
+    /*transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(0) scaleY(1);
+    opacity: 1;*/
+}
+
+.vessel-list ul {
+    text-align: center;
+}
+
+.vessel-list select {
+    width: 100px;
+    margin-bottom: 2px;
+}
+
+.vessel-list input {
+    width: 100px;
+    margin-bottom: 2px;
+}
+
+/*미세먼지 변화 버튼*/
+.monit-item {
+    display: none;
+}
+
+.monit-item.on{
+    display: block;
+}
+.monit-item li {
+    width: 150px;
+    height: 30px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.monit-dust.on {
+    background: #2f5597;
+    color: white;
+}
+
+.monit-pm10:hover {
+    cursor: pointer;
+    background: #2f5597;
+    color: white;
+}
+
+.monit-pm25:hover {
+    cursor: pointer;
+    background: #2f5597;
+    color: white;
+}
+
+/*미세먼지 슬라이더*/
+.dust-slider-section {
+    position: absolute;
+    width: 705px;
+    height: 106px;
+    border: 3px solid #2f5597;
+    border-radius: 15px;
+    background: #2f5597;
+    color: white;
+    left: 52%;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    flex-direction: column;
+}
+.slider-dust-index-img-section {
+    position: absolute;
+    z-index: 9999;
+    bottom: 80px;
+    right: 0px;
+    margin-right: 16px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.dust-slider-btn-container {
+    display: flex;
+    align-items: center;
+    margin: 7px 0px 8px 10px;
+}
+
+.slider-dust-index-img-section img {
+
+    width: 564px;
+    margin-bottom: 14px;
+}
+
+.slider-dust-index-img {
+    display: none;
+}
+
+.slider-dust-index-img-01.on{
+    display: block;
+}
+
+.slider-dust-index-img-02.on{
+    display: block;
+}
+.dust-slider-btn {
+    color: white;
+    background: #8faadc;
+    border-radius: 14px;
+    border: none;
+}
+
+.dust-slider-btn:hover {
+    background: #8898b7;
+}
+
+.next-date-btn.off{
+    background: #b5b5b5;
+    color: #dfdfdf;
+}
+
+.next-date-btn.off:hover {
+    cursor: not-allowed;
+}
+
+
+.dust-date {
+    margin: 0px 7px 0px 7px;
+}
+
+.play-container {
+    display: flex;
+    align-items: center;
+    margin-top: 11px;
+}
+.slider-btn {
+    display: flex;
+    margin: 0px 13px 0 10px;
+
+}
+.slider-bar {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.play-btn {
+    border-radius: 6px;
+    color: white;
+    background: black;
+    border: 2px solid white;
+    width: 30px;
+    height: 30px;
+}
+
+.paused {
+    display: none;
+}
+
+.slider-time {
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+    margin: 0 28px 0 24px;
+}
+
+.legend-img {
+    display: none;
+    width: 500px;
+}
+
+/*미세먼지 범례표*/
+.dust-index-img-section {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /*z-index: 9999;*/
+}
+
+.dust-index-img-section img {
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    /*right: 0;*/
+    width: 500px;
+    /*height: 41px;*/
+}
+
+.dust-legend-img {
+    /*display: none;*/
+}
+
+.dust-index-img-01.on{
+    display: block;
+}
+
+.dust-index-img-02.on{
+    display: block;
+}
+/*시민제보 미세먼지 범례*/
+.tipoff-dust-index-img-section {
+    position: absolute;
+    z-index: 9999;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/*
+.tipoff-dust-index-img {
+    display: none;
+    width: 500px;
+}
+*/
+.tipoff-dust-index-img.on {
+    display: inline-block;
+}
+
+/* aod 범례 */
+.aod-dust-index-img-section {
+    position: absolute;
+    z-index: 9999;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/*
+.aod-dust-index-img {
+    display: none;
+    width: 500px;
+}
+*/
+.aod-dust-index-img.on {
+    display: inline-block;
+}
+
+/* util-section */
+.util-section {
+    width: 100%;
+    position: absolute;
+    right: 8px;
+    bottom: 4px;
+    z-index: 999;
+    transform: translate(0, 0);
+    transition: .5s;
+}
+
+.util-section.on {
+    transform: translate(calc(var(--side-section-width) * -1), 0);
+}
+
+.util-issue-section {
+    display: flex;
+    justify-content: end;
+}
+/* util-section 끝 */
+
+/*미세먼지 경보*/
+.dust-issue {
+    width: 100px;
+    height: 150px;
+    border: 1px solid #c4707d;
+    border-radius: 6px;
+    background: #c4707d;
+    display: none;
+}
+
+.dust-issue.show {
+    display: block;
+}
+
+.dust-issue img {
+    width: 64px;
+    height: 69px;
+    right: -18px;
+    bottom: 8px;
+}
+
+.dust-issue-text {
+    text-align: center;
+    color: white;
+    font-size: 19px;
+}
+
+.issue-dust-type {
+    top: 3px;
+}
+
+.issue-admdst-name {
+    bottom: 8px;
+}
+
+/*미세먼지 지수 예보 구별 css*/
+.dust-board-table {
+    display: flex;
+}
+
+.dust-now-table {
+    width: 340px;
+}
+.dust-forecast-table {
+    width: 169.5px;
+}
+
+.dot-line {
+    height: 153px;
+    border-left : thick dotted #595959;
+    margin: 0 15px 0 15px;
+}
+/*대시보드 메뉴 커버*/
+
+.ship-ratio-cover.active1 {
+    display: block;
+}
+/*예보 팝업*/
+.forecast-container {
+    display: flex;
+}
+
+.forecast-info {
+    margin: 3px 0 0 44px;
+}
+
+.forecast-content {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    top: -112px;
+    right: -11px;
+    z-index: 9999;
+    background: #FFFFFF;
+    border-radius: 7px;
+    box-shadow: 5px 5px 10px;
+    padding: 12px;
+    font-size: 14px;
+    display: none;
+}
+
+.forecast-content:after {
+    position: absolute;
+    right: 10px;
+    top: 100px;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 16px solid #FFFFFF;
+    content:"";
+}
+
+.forecast-content.on {
+    display: block;
+}
+/* 주임님 코드 끝 */
+
+/* 시민제보 팝업 */
+#tipoff-popup {
+    background: #4472c4;
+    padding : 4px 12px;
+    border-radius: 8px;
+    display: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none
+}
+
+.tipoff-popup-title {
+    text-align :center;
+    font-size:24px;
+    color:#FFFFFF;
+}
+
+.tipoff-popup-content {
+    display:flex;
+    flex-direction: column;
+    background: #ffffff;
+    margin: 4px 0;
+    padding : 8px 12px;
+    border-radius: 4px;
+}
+
+.tipoff-popup-date {
+    color: rgb(255, 208, 65);
+}
+
+.tipoff-popup-tipoff {
+
+}
+/* 시민제보 팝업 끝 */
+
+/* 갈맷길 팝업 */
+#gm-popup{
+    background: #4573c4;
+    padding : 4px 12px;
+    border-radius: 8px;
+    display: none;
+    position: absolute;
+    left: 15px;
+    width: 120px;
+}
+
+.gm-popup-title {
+    color: #ffffff;
+}
+
+.gm-popup-content {
+    color: white;
+}
+/* 갈맷길 팝업 끝 */
+
+.dust-chart-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-right: 20px;
+}
+
+.dust-chart-header > img {
+    height: 20px;
+    width: 219px;
+    margin-right: 5px;
+    margin-bottom: 7px;
+}
+
+@media screen and (min-width: 600px) and (max-width: 1400px) {
+    :root {
+        --font-size-md: 0.8rem;
+        --font-size-sm: 0.6rem;
+    }
+
+    .total-chart {
+        width: 518px;
+    }
+
+    .monit-item li {
+        width: 120px;
+        height: 24px;
+        font-size: var(--font-size-md);
+    }
+}
+
+/* 모바일 width 380px ~ 600px */
+@media screen and (orientation: portrait) {
+
+    /* 바다좋은부산 */
+
+    .msrstn-section {
+        height: auto;
+    }
+
+    .msrstn-table {
+        min-height: auto;
+        font-size: var(--font-size-md);
+    }
+
+    .dust-index-date {
+        font-size: var(--font-size-md);
+    }
+    .dust-index {
+        font-size: calc(var(--font-size-md) * 1.1);
+    }
+
+    .forecast-section {
+         max-height: none;
+    }
+
+    .dust-chart-section {
+         height: auto;
+        /*height: 26vh;*/
+    }
+
+    .dust-chart-table {
+        height: auto;
+        font-size: var(--font-size-md);
+    }
+
+    .total-chart,
+    .ship-chart{
+        width: 84.5vw;
+    }
+
+    .ship-chart {
+        height: 22vh;
+    }
+
+    .ship-chart-section {
+        height: auto;
+    }
+
+    .transport-chart {
+        flex: 1.5;
+        width: 50vw;
+        /*height: 60%;*/
+    }
+
+    .transport-table {
+        font-size: var(--font-size-md);
+    }
+
+    .transport-chart-section {
+        height: 60%;
+    }
+
+    /* 미세먼지 변화 슬라이더 */
+    .dust-slider-section {
+        width: 96vw;
+        height: 80px;
+    }
+    .dust-date {
+        margin: 0px 6px;
+        font-size: var(--font-size-md);
+    }
+
+    .dust-slider-btn {
+        padding: 0px;
+        height: 14px;
+        width: 14px;
+        font-size: 10px;
+    }
+
+    .play-btn {
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .play-container {
+        margin-top: 6px;
+    }
+
+    .slider-time {
+        font-size: var(--font-size-md);
+        width: 92%;
+    }
+
+    .monit-item li {
+        width: 88px;
+        height: 20px;
+        border-radius: 20px;
+        font-size: 12px;
+    }
+    /* 미세먼지 변화 슬라이더 끝 */
+
+    /* 바다좋은부산 끝 */
+
+    /* 살기 좋은 부산 */
+    .side-section-area .forecast-section .dash-section-title span {
+        font-size: calc(var(--font-size-md) * 0.775);
+    }
+
+    .side-section-area .forecast-section .dash-section-title > span {
+        position: absolute;
+        left: 4px;
+    }
+
+    .side-section-area .forecast-section .dash-section-title {
+        height: 10px;
+    }
+
+    .side-section-area .area-dash-section{
+        height: auto;
+    }
+
+    .side-section-area .area-forecast-section {
+        flex: none;
+        padding: 4px;
+    }
+
+    .side-section-area .area-index-section {
+        flex: none;
+        padding: 4px;
+    }
+    .side-section-area .dust-index-img {
+        width: 30px;
+        height: 30px;
+        flex: 1;
+        margin: auto;
+    }
+
+    .side-section-area .dust-index {
+        font-size: var(--font-size-md);
+    }
+
+    #area-lpi-section-portrait,
+    #galmaet-lpi-section-portrait{
+        height: 28vh;
+        width: 212px;
+    }
+
+    /* 살기 좋은 부산 끝 */
+
+    /* 걷기 좋은 부산 */
+    .side-section-galmaet .forecast-section .dash-section-title span {
+        font-size: calc(var(--font-size-md) * 0.775);
+    }
+
+    .side-section-galmaet .forecast-section .dash-section-title > span {
+        position: absolute;
+        left: 4px;
+    }
+
+    .side-section-galmaet .forecast-section .dash-section-title {
+        height: 10px;
+    }
+
+    .side-section-galmaet .galmaet-dash-section{
+        height: auto;
+    }
+
+    .side-section-galmaet .galmaet-aod-section {
+        flex: none;
+        padding: 4px;
+    }
+
+    .side-section-galmaet .galmaet-index-section {
+        flex: none;
+        padding: 4px;
+    }
+    .side-section-galmaet .dust-index-img {
+        width: 30px;
+        height: 30px;
+        flex: 1;
+        margin: auto;
+    }
+
+    .side-section-galmaet .dust-index {
+        font-size: var(--font-size-md);
+    }
+
+    .galmaet-info-content .galmaet-lk-link {
+        margin-right: 5px;
+    }
+
+    .galmaet-info-content a {
+        font-size: 0.5rem;
+    }
+
+    .side-section-galmaet .galmaet-lk-section {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* 걷기 좋은 부산 끝 */
+    .util-section {
+        bottom: 24px;
+    }
+
+    .util-section.on {
+        transform: translate(0, calc(var(--side-section-height) * -1));
+    }
+
+    .dust-index-img-section img,
+    .tipoff-dust-index-img{
+        width: 96vw;
+    }
+
+    /* 버튼 */
+    .page-btn.next {
+        right: -4px;
+    }
+
+    .page-btn:hover {
+        opacity: 1;
+    }
+    /* 버튼 끝 */
+
+    /* 대시보드 커버 */
+    .side-section-cover {
+        padding-top: 8%;
+        border-radius: 0;
+    }
+/* 대시보드 커버 끝 */
+
+    /* 팝업 */
+    #tipoff-popup {
+        padding: 4px 6px;
+    }
+    .tipoff-popup-title {
+        font-size: var(--font-size-md);
+    }
+    .tipoff-popup-content {
+        font-size: var(--font-size-sm);
+    }
+    /* 팝업 끝 */
+}
+@media screen and (min-width: 600px) and (max-width: 1000px) {
+    .dust-index-img-section img,
+    .tipoff-dust-index-img {
+        width: 344px;
+    }
+
+    /* 미세먼지 변화 슬라이더 */
+    .dust-date {
+        margin: 0px 6px;
+        font-size: var(--font-size-md);
+    }
+
+    .dust-slider-btn {
+        padding: 0px;
+        height: 14px;
+        width: 14px;
+        font-size: 10px;
+    }
+
+    .play-btn {
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .play-container {
+        margin-top: 6px;
+    }
+
+    .dust-slider-section {
+        width: 600px;
+        height: 80px;
+    }
+
+    .slider-time {
+        font-size: var(--font-size-md);
+    }
+    /* 미세먼지 변화 슬라이더 끝 */
+}
+
+/* 모바일 width 380px 이하*/
+@media screen and (max-width: 380px) {
+
+    :root {
+        --font-size-md: 0.6rem;
+        --font-size-sm: 0.5rem;
+    }
+    #area-lpi-section-portrait,
+    #galmaet-lpi-section-portrait {
+        height: 26vh;
+        width: 189px;
+    }
+
+    .side-section-area .dust-index,
+    .side-section-galmaet .dust-index {
+        font-size: calc(var(--font-size-md) * 0.9);
+    }
+}
+
+/* 모바일 가로 */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+    :root {
+        --side-section-width: 400px;
+        --side-header-height: 3rem;
+        --font-size-lg: 1.2rem;
+        --font-size-md: 0.7rem;
+        --font-size-sm: 0.5rem;
+    }
+
+    .theme-menu {
+        height: 2.5em;
+    }
+
+    .theme-item > span {
+        font-size: var(--font-size-sm);
+    }
+
+    .side-theme {
+        top: 58px;
+        left: -212px;
+    }
+
+    .side-theme-item > img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .side-theme-item > span {
+        font-size: var(--font-size-sm);
+    }
+
+    .side-theme-item {
+        width: 110px;
+        height: 24px;
+    }
+
+    .side-theme-section {
+        right: -70px;
+        top: auto;
+    }
+
+    .side-section-cover {
+        padding-top: 3%;
+    }
+
+    /* 대시보드 */
+    .forecast-section {
+        max-height: none;
+    }
+
+    .dash-section {
+        border: 1px solid lightgray;
+        border-radius: 8px;
+        margin-bottom: 4px;
+        padding: 4px;
+    }
+
+    .dash-section-title {
+        margin-bottom: 4px;
+    }
+
+    /* 바다 좋은 부산*/
+    .msrstn-section {
+        height: auto;
+    }
+
+    .dash-section-title {
+        margin-bottom: 4px;
+    }
+
+    .msrstn-table {
+        min-height: auto;
+        font-size: var(--font-size-md);
+    }
+
+    .dust-index {
+        font-size: calc(var(--font-size-md) * 1.1);
+    }
+
+    .dust-chart-section {
+        height: auto;
+    }
+
+    .dust-chart-table {
+        height: auto;
+        font-size: var(--font-size-md);
+    }
+
+    .dust-chart-portrait,
+    .area-chart-portrait {
+        height: 15vw;
+        width: 92.5vh;
+    }
+
+    .total-chart,
+    .ship-chart {
+        width: 92.5vh;
+        height: 22vw;
+    }
+
+    .total-chart-section,
+    .total-chart-section,
+    .ship-chart-section {
+        height: auto;
+    }
+
+    .transport-chart-section {
+        height: 50vh;
+    }
+
+    .transport-chart {
+        flex: 1.5;
+        width: 50vh;
+    }
+
+    .transport-table {
+        font-size: var(--font-size-md);
+    }
+
+    /* 바다 좋은 부산 끝 */
+
+    /* 살기 좋은 부산 */
+    .side-section-area .area-dash-section {
+        height: auto;
+    }
+    .side-section-area .area-index-section {
+        flex: none;
+        padding: 4px;
+    }
+    .side-section-area .forecast-section .dash-section-title {
+        height: 10px;
+    }
+    .side-section-area .forecast-section .dash-section-title > span {
+        position: absolute;
+        left: 4px;
+    }
+    .side-section-area .dust-index-img {
+        width: 30px;
+        height: 30px;
+        flex: 1;
+        margin: auto;
+    }
+
+    .side-section-area .dust-index {
+        font-size: var(--font-size-md);
+    }
+
+    #area-lpi-section-portrait,
+    #galmaet-lpi-section-portrait{
+        height: 26vw;
+        width: 212px;
+    }
+    /* 살기 좋은 부산 끝 */
+
+    /* 걷기 좋은 부산 */
+    .side-section-galmaet .galmaet-dash-section {
+        height: auto;
+    }
+    .side-section-galmaet .forecast-section .dash-section-title {
+        height: 10px;
+    }
+    .side-section-galmaet .forecast-section .dash-section-title > span {
+        position: absolute;
+        left: 4px;
+    }
+    .side-section-galmaet .galmaet-index-section {
+        flex: none;
+        padding: 4px;
+    }
+    .galmaet-info-content .galmaet-lk-link {
+        margin-right: 5px;
+    }
+    .galmaet-info-content a {
+        font-size: 0.5rem;
+    }
+    .side-section-galmaet .galmaet-lk-section {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    /* 걷기 좋은 부산 끝 */
+
+    /* 대시보드 끝 */
+    /* toggle 버튼 */
+    .slider:before {
+        height: 16px;
+        width: 16px;
+    }
+
+    .switch {
+        width: 40px;
+        height: 20px;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(16px);
+    }
+
+    /* toggle 버튼 끝 */
+}
+
+
+.galmaetgil-overlay {
+    height: auto;
+    width: auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px;
+    left: 50%;
+    transform: translateX(3%);
+    display: none;
+    pointer-events: none;
+}

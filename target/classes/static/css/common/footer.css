@@ -1,0 +1,27 @@
+footer {
+
+    display: flex;
+    margin: 14px 0;
+    width: 100vw;
+}
+
+.footer-content {
+    width: 80%;
+    flex: 8;
+}
+
+.footer-img {
+    width: 65%;
+    height: 50%;
+}
+
+.footer-img:hover {
+    cursor: pointer;
+}
+
+.footer-btn {
+    flex: 1;
+    background: none;
+    border: none;
+}
+

@@ -1,0 +1,123 @@
+header {
+    display: flex;
+    height: 5em;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+}
+
+header a {
+    color: black;
+    text-decoration: none;
+}
+
+header a:visited,
+header a:active {
+    color: black;
+}
+
+.menu-section{
+    display: flex;
+}
+
+.menu-section a {
+    position: relative;
+    font-size: 1.1vw;
+    font-weight: bold;
+    padding: 5px 5vw;
+    border-right: 1px lightgray solid;
+}
+
+.menu-section a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: rgba(66, 64, 64, 0.38);
+    transition: all .2s ease-out;
+}
+
+.menu-section a:hover::after{
+    width: 75%;
+}
+
+.menu-section li:last-child a {
+    border-right: none;
+}
+
+.menu-item > a.on{
+    background: linear-gradient(to right, #e41486, #e7cdda);
+    color: transparent;
+    -webkit-background-clip: text;
+}
+
+.ci-div {
+    margin-left: 55px;
+}
+
+.ci-img {
+    width: 10.5vw;
+    height: 3vw;
+}
+
+.icon-section {
+    display: flex;
+    margin-right: 55px;
+}
+
+.icon-section a {
+    padding-right: 28px;
+}
+
+.icon-img {
+    width: 2vw;
+    height: 2vw;
+}
+
+.header-active{
+    background-color: white;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+
+    -webkit-transition-duration:0.4s;
+    -webkit-transition-timing-function:ease;
+}
+
+.header-deactive{
+
+    background-color: transparent;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+
+    -webkit-transition-duration:0.4s;
+    -webkit-transition-timing-function:ease;
+}
+
+/* 반응형 */
+/* 태블릿 */
+@media screen and (max-width:1300px) {
+    .ci-div{
+        margin-left: 15px;
+    }
+
+    .icon-section{
+        margin-right: 15px;
+    }
+
+    .icon-section a {
+        padding-right: 15px;
+    }
+}
+
+/* 모바일 */
+@media screen and (max-width:767px) {
+
+}
+/* 반응형 끝*/

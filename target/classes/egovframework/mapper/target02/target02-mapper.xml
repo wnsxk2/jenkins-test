@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.busan.smartvillage.target02.mapper.Target02Mapper">
+
+    <resultMap type="GalmaetVO" id="GalmaetList">
+        <result column="geom" property="geom"/>
+        <collection property="properties" resultMap="GalmaetProp" columnPrefix="p_"/>
+    </resultMap>
+
+    <resultMap id="GalmaetProp" type="GalmaetVO">
+        <result column="course_id" property="courseId"/>
+        <result column="gugan_id" property="guganId"/>
+        <result column="gugan_nm" property="guganNm"/>
+        <result column="course_nm" property="courseNm"/>
+        <result column="gm_range" property="gmRange"/>
+        <result column="gm_degree" property="gmDegree"/>
+        <result column="gm_course" property="gmCourse"/>
+        <result column="lk_nm" property="lkNm"/>
+        <result column="lk_img_path" property="lkImgPath"/>
+    </resultMap>
+
+    <resultMap type="AdmdstDataVO" id="TipoffList">
+        <result column="geom" property="geom"/>
+        <collection property="properties" resultMap="TipoffProp" columnPrefix="p_"/>
+    </resultMap>
+
+    <resultMap id="TipoffProp" type="AdmdstDataVO">
+        <result column="sgg_id" property="id"/>
+        <result column="admdst_cd" property="admdstCd"/>
+        <result column="admdst_nm" property="admdstNm"/>
+        <result column="eng_admdst_nm" property="engAdmdstNm"/>
+        <result column="sgg_div_num" property="sggDivNum"/>
+    </resultMap>
+
+    <resultMap id="GalmaetGilTourPropertyMap" type="GalmaetGilTourVO">
+        <result column="imgFileNm" property="imgFileNm"/>
+        <result column="iconFileNm" property="iconFileNm"/>
+        <result column="place" property="place"/>
+        <result column="title" property="title"/>
+        <result column="itemCntnts" property="itemCntnts"/>
+    </resultMap>
+
+    <resultMap id="GalmaetGilTourListMap" type="GalmaetGilTourVO">
+        <result column="location" property="geom"/>
+        <collection property="properties" resultMap="GalmaetGilTourPropertyMap"/>
+    </resultMap>
+
+    <resultMap id="GalmaetGilAodMap" type="AodVO">
+        <constructor>
+            <arg column="aod" javaType="String"/>
+            <arg column="aodIndex" javaType="String"/>
+            <arg column="msrmtdt" javaType="String"/>
+        </constructor>
+    </resultMap>
+
+    <resultMap id="LifePatternConstructMap" type="LifePatternVO">
+        <constructor>
+            <arg column="lifepatternnm" javaType="String"/>
+            <arg column="englifepatternnm" javaType="String"/>
+            <arg column="lifepatternfilenm" javaType="String"/>
+            <arg column="lpiType" javaType="String"/>
+        </constructor>
+    </resultMap>
+
+    <resultMap id="GalmaetgilGeoStructureMap" type="GeoStructure">
+        <result column="geom" property="geom"/>
+        <collection property="properties" ofType="GalmaetVO">
+            <constructor>
+                <idArg column="courseId" javaType="_int"/>
+                <idArg column="guganId" javaType="_int"/>
+                <arg column="guganNm" javaType="string"/>
+                <arg column="courseNm" javaType="string"/>
+                <arg column="gmRange" javaType="string"/>
+                <arg column="gmDegree" javaType="string"/>
+                <arg column="gmCourse" javaType="string"/>
+                <arg column="lkNm" javaType="string"/>
+                <arg column="lkImgPath" javaType="string"/>
+                <arg column="reqHr" javaType="string"/>
+                <arg column="dust_msrmtdt" javaType="String"/>
+            </constructor>
+            <association property="aodInfo" javaType="AodVO" resultMap="GalmaetGilAodMap" columnPrefix="aod_"/>
+            <collection property="tourInfo" resultMap="GalmaetGilTourListMap" columnPrefix="tour_"/>
+            <collection property="dustInfo" resultMap="LifePatternConstructMap" ofType="LifePatternVO"
+                        columnPrefix="lpi_"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="RegionAodGeoStructureMap" type="GeoStructure">
+        <result column="geom" property="geom"/>
+        <collection property="properties" ofType="AodVO">
+            <constructor>
+                <arg column="admdstName" javaType="String"/>
+                <arg column="aod" javaType="String"/>
+                <arg column="aodIndex" javaType="String"/>
+                <arg column="msrmtdt" javaType="String"/>
+            </constructor>
+        </collection>
+    </resultMap>
+
+    <resultMap id="MicroDustInfoSliderMap" type="MicroDustInfoVO">
+        <constructor>
+            <arg column="msrmtDt" javaType="string"/>
+            <arg column="engLifePatternName" javaType="string"/>
+        </constructor>
+    </resultMap>
+
+    <resultMap id="PortSliderGeoStructureMap" type="GeoStructure">
+        <result column="geom" property="geom"/>
+        <collection property="properties" ofType="MeasuringStationVO">
+            <constructor>
+                <arg column="msrstnId" javaType="string"/>
+                <arg column="msrstnCd" javaType="_int"/>
+                <arg column="msrstnNm" javaType="string"/>
+            </constructor>
+            <collection property="pmInfo" resultMap="MicroDustInfoSliderMap" ofType="MicroDustInfoVO"/>
+        </collection>
+    </resultMap>
+
+
+    <sql id="msrstnTablename">
+        <if test="mapType != null and 'area'.equals(mapType)">
+            tarea_msrstn
+        </if>
+        <if test="mapType != null and 'port'.equals(mapType)">
+            tport_msrstn
+        </if>
+    </sql>
+
+    <sql id="dustTablename">
+        <if test="mapType != null and 'area'.equals(mapType)">
+            tarea_microdust_info
+        </if>
+        <if test="mapType != null and 'port'.equals(mapType)">
+            tport_microdust_info
+        </if>
+    </sql>
+
+    <sql id="msrstnIdColumnName">
+        <if test="mapType != null and 'area'.equals(mapType)">
+            area_msrstn_id
+        </if>
+        <if test="mapType != null and 'port'.equals(mapType)">
+            port_msrstn_id
+        </if>
+    </sql>
+
+    <sql id="idColumnName">
+        <if test="mapType != null and 'area'.equals(mapType)">
+            tsgg.admdst_cd
+        </if>
+        <if test="mapType != null and 'port'.equals(mapType)">
+            tm.PORT_MSRSTN_ID
+        </if>
+    </sql>
+
+    <sql id="avgJoinTable">
+        <if test="mapType != null and 'area'.equals(mapType)">
+            JOIN TAREA_MSRSTN tm
+                ON tm.EMD_ID = emd.EMD_ID
+            JOIN TAREA_MICRODUST_INFO tmi
+                ON tmi.AREA_MSRSTN_ID = tm.AREA_MSRSTN_ID
+            WHERE
+                TO_CHAR(tmi.MSRMT_DT, 'YYYY-mm-dd') = #{selectDate}
+            AND
+                tmi.MSRMT_DT <![CDATA[<=]]> TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI')
+        </if>
+        <if test="mapType != null and 'tipoff'.equals(mapType)">
+            JOIN TTIP_OFF_MICRODUST_INFO tmi
+                ON EMD.EMD_ID = tmi.EMD_ID
+            WHERE
+                TO_CHAR(tmi.md_srvy_dt, 'YYYY-mm-dd') = #{selectDate}
+            AND
+                tmi.md_srvy_dt <![CDATA[<=]]> TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI')
+        </if>
+    </sql>
+
+    <sql id="tipoffColumnName">
+        <if test="mapType != null and 'area'.equals(mapType)">
+            , TRUNC(avg(CAST(tmi.PM10 AS integer))) AS pm10
+        </if>
+        <if test="mapType != null and 'tipoff'.equals(mapType)">
+            , TRUNC(avg(CAST(tmi.md_srvy_index AS integer))) AS pm10
+        </if>
+    </sql>
+
+    <select id="selectDustInfo" parameterType="map" resultType="FeaturePropVO">
+        SELECT
+            tm.
+            <include refid="msrstnIdColumnName">
+                <property name="mapType" value="mapType"/>
+            </include> as msrstn_id
+            , tsgg.admdst_cd
+            , tsgg.admdst_nm
+            , tsgg.eng_admdst_nm
+            , tmi.pm10
+            , tmi.pm25
+             <if test="mapType != null">
+                 , #{mapType} as map_type
+             </if>
+            , tmi.msrmt_dt
+        FROM
+            temd
+        JOIN tsgg
+            ON tsgg.sgg_id = temd.sgg_id
+        JOIN
+            <include refid="msrstnTablename">
+                <property name="mapType" value="mapType"/>
+            </include> tm
+            ON tm.emd_id = temd.emd_id
+        JOIN
+            <include refid="dustTablename">
+                <property name="mapType" value="mapType"/>
+            </include> tmi
+            ON
+                tmi.
+                <include refid="msrstnIdColumnName">
+                    <property name="mapType" value="mapType"/>
+                </include>
+                = tm.
+                <include refid="msrstnIdColumnName">
+                    <property name="mapType" value="mapType"/>
+                </include>
+            AND tmi.msrmt_dt = (
+                SELECT MAX(msrmt_dt) as latest_time
+                FROM
+                    <include refid="dustTablename">
+                        <property name="mapType" value="mapType"/>
+                    </include>
+                <if test="currentTime != null">
+                    WHERE msrmt_dt <![CDATA[<=]]> TO_TIMESTAMP(#{currentTime}, 'YYYY-MM-DD HH24:MI')
+                </if>
+            )
+    </select>
+
+<!--  selectDustInfo와 하나의 메서드로 변경  -->
+    <select id="selectGmDustInfo" parameterType="map" resultType="FeaturePropVO">
+        SELECT
+            Tgi.gugan_NM
+            , TSGG.ADMDST_CD
+            , TSGG.ADMDST_NM
+            , TSGG.ENG_ADMDST_NM
+            , tgmi.PM10
+            , tgmi.PM25
+            , 'gm' AS MAP_type
+            , tgmi.MSRMT_DT
+        FROM
+            temd
+        JOIN tsgg
+            ON TSGG.SGG_ID = TEMD.SGG_ID
+        JOIN TAREA_MSRSTN TM
+            ON tm.EMD_ID = TEMD.EMD_ID
+        JOIN TGALMAETGIL_INFO TgI
+            ON tgi.AREA_MSRSTN_ID = tm.AREA_MSRSTN_ID
+        JOIN TGALMAETGIL_MICRODUST_INFO tgmi
+            ON tgmi.COURSE_ID = tgi.COURSE_ID
+            AND tgmi.GUGAN_ID = tgi.GUGAN_ID
+            AND tgmi.MSRMT_DT =
+                (SELECT MAX(MSRMT_DT) AS latest_time
+                FROM TGALMAETGIL_MICRODUST_INFO tmi
+                WHERE MSRMT_DT <![CDATA[<=]]> TO_TIMESTAMP(#{currentTime}, 'YYYY-MM-DD HH24:MI'));
+    </select>
+
+    <select id="selectPortDustData" resultType="PortMsrstnVO">
+        SELECT port_msrstn_id as portMsrstnId
+             , msrstn_nm as portName
+             , msrstn_addr as portAddr
+             , instl_yr as installYear
+             , item as measureItem
+             , ST_AsText(ST_Transform(ST_SetSRID("location", 4326), 3857)) as geom
+        FROM TPORT_MSRSTN
+    </select>
+
+    <select id="selectYesterdayDust" parameterType="map" resultType="FeaturePropVO">
+        SELECT
+        <include refid="msrstnIdColumnName">
+            <property name="mapType" value="mapType"/>
+        </include> as msrstn_id,
+        pm10,
+        pm25,
+        TO_CHAR(msrmt_dt, 'yyyy-MM-dd') as msrmtDt
+        FROM
+        <include refid="dustTablename">
+            <property name="mapType" value="mapType"/>
+        </include>
+        WHERE <include refid="msrstnIdColumnName">
+        <property name="mapType" value="mapType"/>
+    </include> = #{msrstn_id}
+        AND TO_CHAR(msrmt_dt, 'yyyy-MM-dd') = (
+        SELECT
+        TO_CHAR(MAX(msrmt_dt) - INTERVAL '1 day', 'yyyy-MM-dd')
+        FROM
+        <include refid="dustTablename">
+            <property name="mapType" value="mapType"/>
+        </include>
+        )
+    </select>
+
+    <select id="selectDAILYDustInfo" parameterType="map" resultType="FeaturePropVO">
+        SELECT
+            tm.
+            <include refid="msrstnIdColumnName">
+                <property name="mapType" value="mapType"/>
+            </include> as msrstn_id
+            , tsgg.admdst_cd
+            , tsgg.admdst_nm
+            , tsgg.eng_admdst_nm
+            , tmi.pm10
+            , tmi.pm25
+            <if test="mapType != null">
+                , #{mapType} as map_type
+            </if>
+            , tmi.msrmt_dt
+        FROM
+            temd
+        JOIN tsgg
+            ON tsgg.sgg_id = temd.sgg_id
+        JOIN
+            <include refid="msrstnTablename">
+                <property name="mapType" value="mapType"/>
+            </include> tm
+            ON tm.emd_id = temd.emd_id
+        JOIN
+            <include refid="dustTablename">
+                <property name="mapType" value="mapType"/>
+            </include> tmi
+            ON
+            tmi.
+            <include refid="msrstnIdColumnName">
+                <property name="mapType" value="mapType"/>
+            </include>
+            = tm.
+            <include refid="msrstnIdColumnName">
+                <property name="mapType" value="mapType"/>
+            </include>
+        WHERE
+            tmi.msrmt_dt
+                BETWEEN TO_TIMESTAMP(
+                    <if test="selectTime != null">
+                        #{selectTime}
+                    </if>
+                    , 'YYYY-MM-DD HH24:MI') - INTERVAL '24 hours'
+                AND TO_TIMESTAMP(
+                    <if test="selectTime != null">
+                        #{selectTime}
+                    </if>
+                    , 'YYYY-MM-DD HH24:MI')
+        AND
+            <include refid="idColumnName">
+                <property name="mapType" value="mapType"/>
+            </include>
+            =
+            <if test="code != null">
+                #{code}
+            </if>
+        ORDER BY tmi.msrmt_dt DESC;
+    </select>
+
+    <select id="selectLifeIndex" parameterType="map" resultType="FeaturePropVO">
+        SELECT
+            tmi.LIFE_INDEX_TYPE
+             , tmi.LIFE_INDEX_SCR
+        FROM
+            TSGG sgg
+                JOIN TEMD emd
+                     ON EMD.SGG_ID = SGG.SGG_ID
+                JOIN TAREA_MSRSTN tm
+                     ON tm.EMD_ID = EMD.EMD_ID
+                JOIN TAREA_MICRODUST_INFO tmi
+                     ON tmi.AREA_MSRSTN_ID = tm.AREA_MSRSTN_ID
+                         AND tmi.MSRMT_DT = TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI')
+        WHERE SGG.ADMDST_CD = #{code};
+    </select>
+
+    <select id="selectLifePatternList" resultType="LifePatternVO">
+        SELECT
+            lpi_id
+             , life_pattern_nm
+             , eng_life_pattern_nm
+             , lpi_img_file_nm
+             , lpi_max_scr
+             , lpi_type
+        FROM
+            CD_LIFE_PATTERN_INDEX
+        ORDER BY
+            lpi_id
+    </select>
+
+    <select id="selectSliderDustInfo" parameterType="map" resultType="FeaturePropVO">
+        SELECT
+        tm.
+        <include refid="msrstnIdColumnName">
+            <property name="mapType" value="mapType"/>
+        </include> as msrstn_id
+        , tsgg.admdst_cd
+        , tsgg.admdst_nm
+        , tsgg.eng_admdst_nm
+        , tmi.pm10
+        , tmi.pm25
+        <if test="mapType != null">
+            , #{mapType} as map_type
+        </if>
+        , tmi.msrmt_dt
+        FROM
+        temd
+        JOIN tsgg
+        ON tsgg.sgg_id = temd.sgg_id
+        JOIN
+        <include refid="msrstnTablename">
+            <property name="mapType" value="mapType"/>
+        </include> tm
+        ON tm.emd_id = temd.emd_id
+        JOIN
+        <include refid="dustTablename">
+            <property name="mapType" value="mapType"/>
+        </include> tmi
+        ON
+        tmi.
+        <include refid="msrstnIdColumnName">
+            <property name="mapType" value="mapType"/>
+        </include>
+        = tm.
+        <include refid="msrstnIdColumnName">
+            <property name="mapType" value="mapType"/>
+        </include>
+        WHERE TO_CHAR(tmi.MSRMT_DT, 'YYYY-MM-DD') = #{sliderTime}
+    </select>
+
+    <select id="selectDustDateList" parameterType="map" resultType="FeaturePropVO">
+        SELECT TO_CHAR(msrmt_dt, 'YYYY-MM-DD') as msrmtDt
+        FROM <include refid="dustTablename">
+                <property name="mapType" value="mapType"/>
+            </include>
+        GROUP BY TO_CHAR(msrmt_dt, 'YYYY-MM-DD')
+        ORDER BY TO_CHAR(MSRMT_DT, 'YYYY-MM-DD') DESC
+    </select>
+
+ <!--윤경: mfi.CTPV_ID ='ADMDST00000021' 부분 수정 필요-->
+    <select id="selectForecastList" resultType="ForecastVO">
+        SELECT flpi.index_type as indexType
+             ,flpi.lpi_id as lpiId
+             ,clpi.LIFE_PATTERN_NM as lifePatternName
+             ,clpi.ENG_LIFE_PATTERN_NM as engLifePatternName
+             ,clpi.LPI_IMG_FILE_NM as lpiImgFileName
+             ,mfi.ctpv_num as ctpvNum
+             ,mfi.MSRMT_DT as msrmtDt
+             ,mfi.CTPV_ID as ctpvId
+        FROM TFORECAST_LIFE_PATTERN_INDEX  AS flpi
+                 JOIN CD_LIFE_PATTERN_INDEX AS clpi
+                      ON flpi.LPI_ID = clpi.LPI_ID
+                 JOIN TMICRODUST_FORECAST_INFO AS mfi
+                      ON flpi.CTPV_NUM = mfi.CTPV_NUM AND flpi.CTPV_ID = mfi.CTPV_ID
+        WHERE TO_CHAR(mfi.MSRMT_DT, 'YYYY-MM-DD') = #{tomorrowStr}
+          AND mfi.CTPV_ID ='ADMDST00000021'
+    </select>
+
+    <select id="selectWktGmDataList" resultMap="GalmaetList">
+        SELECT
+            TI.COURSE_ID as p_course_id
+             , ti.GUGAN_ID as p_gugan_id
+             , ti.GUGAN_NM as p_gugan_nm
+             , ti.COURSE_NM as p_course_nm
+             , ti.GUGAN_NM as p_gugan_nm
+             , ti.GM_RANGE as p_gm_range
+             , ti.GM_DEGREE as p_gm_degree
+             , ti.GM_COURSE as p_gm_course
+             , ti.LK_NM as p_lk_nm
+             , ti.LK_IMG_PATH as p_lk_img_path
+             , ST_ASTEXT(ST_TRANSFORM(ti.GEOM,3857)) AS geom
+        FROM
+            TGALMAETGIL_INFO TI;
+    </select>
+
+<!--    <select id="selectPortShipList" resultType="PortShipVO">
+        WITH all_hours AS (
+            SELECT
+                generate_series(
+                            TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI') - INTERVAL '24 hours',
+                            TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI'),
+                            '1 hour'
+                    ) AS hour
+            ),
+            entry_counts AS (
+        SELECT
+            date_trunc('hour', ENTRY_DT) as entryDt,
+            TO_CHAR(date_trunc('hour', ENTRY_DT), 'YYYY-MM-DD HH24:MI') as entryDepartureDt,
+            COUNT(ENTRY_DT) as entryCount
+        FROM
+            tport_ship_info
+        WHERE
+            ENTRY_DT IS NOT NULL
+          AND ENTRY_DT BETWEEN TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI') - INTERVAL '24 hours'
+          AND TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI')
+          AND PORT_MSRSTN_ID = #{portMsrstnId}
+        GROUP BY
+            date_trunc('hour', ENTRY_DT)
+            ),
+            departure_counts AS (
+        SELECT
+            date_trunc('hour', DEPARTURE_DT) as departureDt,
+            TO_CHAR(date_trunc('hour', DEPARTURE_DT), 'YYYY-MM-DD HH24:MI') as entryDepartureDt,
+            COUNT(DEPARTURE_DT) as departureCount
+        FROM
+            tport_ship_info
+        WHERE
+            DEPARTURE_DT IS NOT NULL
+          AND DEPARTURE_DT BETWEEN TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI') - INTERVAL '24 hours'
+          AND TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI')
+          AND PORT_MSRSTN_ID = #{portMsrstnId}
+        GROUP BY
+            date_trunc('hour', DEPARTURE_DT)
+            )
+        SELECT
+            all_hours.hour,
+            COALESCE(entry_counts.entryDepartureDt, TO_CHAR(all_hours.hour, 'YYYY-MM-DD HH24:MI')) AS entryDepartureDt,
+            COALESCE(entry_counts.entryCount, 0) AS entryCount,
+            COALESCE(departure_counts.departureCount, 0) AS departureCount
+        FROM
+            all_hours
+                LEFT JOIN entry_counts ON all_hours.hour = entry_counts.entryDt
+                LEFT JOIN departure_counts ON all_hours.hour = departure_counts.departureDt
+        ORDER BY
+            all_hours.hour
+    </select>-->
+<!--
+    <select id="selectPortShipMap" resultType="PortShipVO">
+        WITH all_hours AS (
+            SELECT generate_series(
+                               TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI') - INTERVAL '24 hours',
+                               TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI'),
+                               '1 hour'
+                       ) AS hour
+            ),
+            entry_counts AS (
+        SELECT
+            DATE_TRUNC('hour', tsi.entry_dt) AS entryHour,
+            tsi.ship_group_nm,
+            COUNT(tsi.ship_group_nm) AS shipGroupEntry
+        FROM
+            tport_ship_info tsi
+        WHERE
+            tsi.entry_dt BETWEEN TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI') - INTERVAL '24 hours'
+          AND TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI')
+          AND tsi.PORT_MSRSTN_ID = #{portMsrstnId}
+        GROUP BY
+            DATE_TRUNC('hour', tsi.entry_dt),
+            tsi.ship_group_nm
+            ),
+            departure_counts AS (
+        SELECT
+            DATE_TRUNC('hour', tsi.departure_dt) AS departureHour,
+            tsi.ship_group_nm,
+            COUNT(tsi.ship_group_nm) AS shipGroupDeparture
+        FROM
+            tport_ship_info tsi
+        WHERE
+            tsi.departure_dt BETWEEN TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI') - INTERVAL '24 hours'
+          AND TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI')
+          AND tsi.PORT_MSRSTN_ID = #{portMsrstnId}
+        GROUP BY
+            DATE_TRUNC('hour', tsi.departure_dt),
+            tsi.ship_group_nm
+            )
+        SELECT
+            ah.hour AS time,
+        sg.ship_group_nm AS shipGroupName,
+        COALESCE(ec.shipGroupEntry, 0) AS shipGroupEntry,
+        COALESCE(dc.shipGroupDeparture, 0) AS shipGroupDeparture
+        FROM
+            all_hours ah
+            CROSS JOIN
+            (SELECT DISTINCT ship_group_nm FROM tport_ship_info) sg
+            LEFT JOIN
+            entry_counts ec ON ah.hour = ec.entryHour AND sg.ship_group_nm = ec.ship_group_nm
+            LEFT JOIN
+            departure_counts dc ON ah.hour = dc.departureHour AND sg.ship_group_nm = dc.ship_group_nm
+        ORDER BY
+            ah.hour,
+            sg.ship_group_nm
+    </select>-->
+
+    <!--선박종류별통계-->
+<!--   <select id="selectPortShipRatio" resultType="PortShipVO">
+       WITH time_series AS (
+           SELECT generate_series(
+                              TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI') - INTERVAL '24 hours',
+                              TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI'),
+                              '1 hour'
+                      ) AS time_slot
+       )
+       SELECT ts.time_slot AS entry_dt,
+              COALESCE(tsi_entry.weight, 0) AS entryWeight,
+              COALESCE(tsi_departure.weight, 0) AS departureWeight
+       FROM time_series ts
+                LEFT JOIN TPORT_SHIP_INFO tsi_entry ON ts.time_slot = tsi_entry.entry_dt
+           AND tsi_entry.PORT_MSRSTN_ID = #{portMsrstnId}
+                LEFT JOIN TPORT_SHIP_INFO tsi_departure ON ts.time_slot = tsi_departure.departure_dt
+           AND tsi_departure.PORT_MSRSTN_ID = #{portMsrstnId}
+       ORDER BY ts.time_slot
+    </select>-->
+
+
+    <select id="selectIssueInfoList" resultType="IssueInfoVO">
+        SELECT t1.ADMDST_NM AS admdstName
+             , t1.ENG_ADMDST_NM AS engAdmdstName
+             , t2.DUST_TYPE AS DUST_TYPE
+            , t2.ISSUE_TYPE AS ISSUE_TYPE
+            , t2.ISSUE_START_DT AS issueStartDateTime
+        /*	, t2.ISSUE_END_DT*/
+        FROM TSGG t1
+        JOIN TMICRODUST_ISSUE_INFO t2
+        ON t1.SGG_ID=t2.SGG_ID
+        WHERE TO_CHAR(t2.ISSUE_START_DT, 'YYYYmmdd')=TO_CHAR(CURRENT_DATE, 'YYYYmmdd')
+        AND t2.ISSUE_END_DT ISNULL
+    </select>
+
+    <select id="selectGalmaetLifePattern" parameterType="map" resultType="LifePatternVO">
+        SELECT
+            clpi.LIFE_PATTERN_NM
+            , clpi.ENG_LIFE_PATTERN_NM
+            , clpi.LPI_TYPE
+            , clpi.LPI_IMG_FILE_NM
+        FROM
+            TGALMAETGIL_INFO TI
+        JOIN TGALMAETGIL_MICRODUST_INFO tmi
+            ON tmi.COURSE_ID = ti.COURSE_ID
+            AND tmi.GUGAN_ID = ti.GUGAN_ID
+            AND tmi.MSRMT_DT = (SELECT MAX(MSRMT_DT) AS latest_time
+                FROM TGALMAETGIL_MICRODUST_INFO tmi
+                WHERE MSRMT_DT <![CDATA[<=]]> TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI'))
+        JOIN TGALMAETGIL_LIFE_PATTERN_INDEX TLPI
+            ON ti.COURSE_ID = tlpi.COURSE_ID
+            AND ti.GUGAN_ID = tlpi.GUGAN_ID
+        JOIN CD_LIFE_PATTERN_INDEX clpi
+            ON tlpi.LPI_ID = CLPI.LPI_ID
+        WHERE
+            ti.COURSE_ID = #{courseId}
+        AND
+            ti.GUGAN_ID = #{guganId}
+    </select>
+
+    <select id="selectWktTipoffDataList" resultMap="TipoffList">
+        SELECT
+            t.SGG_ID as p_sgg_id
+             , t.ADMDST_CD as p_admdst_cd
+             , t.ADMDST_NM as p_admdst_nm
+             , t.ENG_ADMDST_NM as p_eng_admdst_nm
+             , td.SGG_DIV_NUM as p_sgg_div_num
+             , ST_ASTEXT(ST_TRANSFORM(Td.GEOM,3857)) AS geom
+        FROM TSGG_DIV TD
+                 JOIN TSGG t ON t.SGG_ID = td.SGG_ID
+    </select>
+
+    <select id="selectTipoffDataList" parameterType="map" resultType="FeaturePropVO">
+        SELECT
+            sgg.SGG_ID AS id
+            , tmi.md_srvy_dt AS msrmtDt
+            , tmi.md_srvy_index AS pm10
+            , sgg.ADMDST_CD AS admdstCd
+            , EMD.ADMDST_NM AS admdstNm
+            , emd.ENG_ADMDST_NM AS engAdmdstNm
+        FROM
+            TTIP_OFF_MICRODUST_INFO TMI
+        JOIN TEMD emd
+            ON EMD.EMD_ID = tmi.EMD_ID
+        JOIN TSGG sgg
+            ON sgg.SGG_ID = EMD.SGG_ID
+        WHERE
+            TO_CHAR(tmi.md_srvy_dt, 'YYYY-mm-dd') = #{selectDate}
+        AND
+            tmi.md_srvy_dt <![CDATA[<=]]> TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI')
+        ORDER BY
+            tmi.md_srvy_dt DESC
+    </select>
+
+    <select id="selectDustDataList" parameterType="map" resultType="FeaturePropVO">
+        SELECT
+            sgg.SGG_ID AS id
+            , tmi.msrmt_dt AS msrmtDt
+            , tmi.PM10 AS pm10
+            , sgg.ADMDST_CD AS admdstCd
+            , EMD.ADMDST_NM AS admdstNm
+            , emd.ENG_ADMDST_NM AS engAdmdstNm
+        FROM
+            tarea_microdust_info tmi
+        JOIN tarea_msrstn tm
+            ON tm.area_msrstn_id = tmi.area_msrstn_id
+        JOIN TEMD emd
+            ON EMD.EMD_ID = tm.EMD_ID
+        JOIN TSGG sgg
+            ON sgg.SGG_ID = EMD.SGG_ID
+        WHERE
+            TO_CHAR(tmi.msrmt_dt, 'YYYY-mm-dd') = #{selectDate}
+        AND
+            tmi.msrmt_dt <![CDATA[<=]]> TO_TIMESTAMP(#{selectTime}, 'YYYY-MM-DD HH24:MI')
+        ORDER BY
+            tmi.msrmt_dt DESC;
+    </select>
+
+    <select id="selectAvgData" parameterType="map" resultType="FeaturePropVO">
+        SELECT
+            sgg.SGG_ID AS id
+        <include refid="tipoffColumnName">
+            <property name="mapType" value="mapType"/>
+        </include>
+            , sgg.ADMDST_CD AS admdstCd
+            , sgg.ADMDST_NM AS admdstNm
+            , sgg.ENG_ADMDST_NM AS engAdmdstNm
+        FROM
+            TSGG sgg
+        JOIN temd emd
+            ON emd.SGG_ID = sgg.SGG_ID
+        <include refid="avgJoinTable">
+            <property name="mapType" value="mapType"/>
+        </include>
+        GROUP BY
+            sgg.SGG_ID;
+    </select>
+
+    <!--윤경 항만 다시작업-->
+    <!--시간 부분 변경해야함-->
+    <select id="selectPortInfoList" resultType="PortInfoVO">
+    SELECT t1.PORT_MSRSTN_ID as msrstnId
+        ,t1.MSRSTN_CD as msrstnCd
+        ,t1.MSRSTN_NM as msrstnNm
+        ,t1.ENG_MSRSTN_NM as engMsrstnNm
+        ,t1.MSRSTN_ADDR as msrstnAddr
+        ,t1.ENG_MSRSTN_ADDR as engMsrstnAddr
+        ,t1.INSTL_YR as installYear
+        ,t1.ITEM as measureItem
+        ,ST_AsText(ST_Transform(ST_SetSRID(t1."location", 4326), 3857)) as geom
+        ,t2.MSRMT_DT as msrmtDt
+        ,t2.PM10 as pm10
+        ,t2.PM25 as pm25
+        FROM TPORT_MSRSTN as t1
+        JOIN TPORT_MICRODUST_INFO AS t2
+        ON t1.PORT_MSRSTN_ID =  t2.PORT_MSRSTN_ID
+        WHERE t2.MSRMT_DT BETWEEN (
+        SELECT MAX(msrmt_dt)
+        FROM TPORT_MICRODUST_INFO
+        WHERE msrmt_dt <![CDATA[<=]]> TO_TIMESTAMP(#{currentTime}, 'YYYY-MM-DD HH24:MI')
+        ) - INTERVAL '23 hours'
+        AND (
+        SELECT MAX(msrmt_dt)
+        FROM TPORT_MICRODUST_INFO
+        WHERE msrmt_dt <![CDATA[<=]]> TO_TIMESTAMP(#{currentTime}, 'YYYY-MM-DD HH24:MI')
+        )
+        ORDER BY t1.PORT_MSRSTN_ID, t2.MSRMT_DT
+    </select>
+
+    <select id="selectPortShipInfoList" resultType="PortShipInfoVO">
+        SELECT
+        port_msrstn_num AS msrstnNum
+        , PORT_MSRSTN_ID as msrstnId
+        ,SHIP_GROUP_NM as shipGroupNM
+        ,WEIGHT as weight
+        ,ENTRY_DT as entryDepatureDt
+        , 1 as dtType
+        FROM TPORT_SHIP_INFO
+        WHERE entry_dt BETWEEN (SELECT MAX(msrmt_dt) as latest_time
+        FROM tport_microdust_info tmi
+        WHERE msrmt_dt <![CDATA[<=]]> TO_TIMESTAMP(#{currentTime}, 'YYYY-MM-DD HH24:MI')
+                               ) - INTERVAL '23 hours'
+          AND (
+            SELECT MAX(msrmt_dt)
+            FROM TPORT_MICRODUST_INFO
+            WHERE msrmt_dt <![CDATA[<=]]> TO_TIMESTAMP(#{currentTime}, 'YYYY-MM-DD HH24:MI')
+            )
+        UNION all
+        SELECT
+        port_msrstn_num AS msrstnNum
+        , PORT_MSRSTN_ID as msrstnId
+        ,SHIP_GROUP_NM as shipGroupNM
+        ,WEIGHT as weight
+        ,departure_dt as entryDepatureDt
+        , 2 as dtType
+        FROM TPORT_SHIP_INFO
+        WHERE departure_dt BETWEEN (SELECT MAX(msrmt_dt) as latest_time
+        FROM tport_microdust_info tmi
+        WHERE msrmt_dt <![CDATA[<=]]> TO_TIMESTAMP(#{currentTime}, 'YYYY-MM-DD HH24:MI')
+                                   ) - INTERVAL '23 hours'
+          AND (
+            SELECT MAX(msrmt_dt)
+            FROM TPORT_MICRODUST_INFO
+            WHERE msrmt_dt <![CDATA[<=]]> TO_TIMESTAMP(#{currentTime}, 'YYYY-MM-DD HH24:MI')
+            )
+    </select>
+
+    <!--어제 데이터-->
+    <select id="selectYesterdayData" resultType="PortInfoVO">
+        SELECT port_msrstn_id                  as msrstnId
+             , pm10                            as pm10
+             , pm25                            as pm25
+             , TO_CHAR(msrmt_dt, 'yyyy-MM-dd') as msrmtDt
+        FROM TPORT_MICRODUST_INFO
+        WHERE TO_CHAR(msrmt_dt, 'yyyy-MM-dd') = (SELECT TO_CHAR(MAX(msrmt_dt) - INTERVAL '1 day', 'yyyy-MM-dd')
+                                                 FROM TPORT_MICRODUST_INFO)
+    </select>
+
+    <!-- 코드 수정 -->
+    <!-- 갈맷길 정보 데이터 -->
+    <select id="selectGalmaetgilInfoList" resultMap="GalmaetgilGeoStructureMap">
+        WITH latest_measurements AS (
+            SELECT aod.COURSE_ID
+                 , aod.GUGAN_ID
+                 , aod.aod
+                 , aod.aod_index
+                 , aod.msrmt_dt AS aod_msrmt_dt
+                 , microdust.msrmt_dt AS microdust_msrmt_dt
+                 , microdust.COURSE_NUM
+            FROM TAOD_GALMAETGIL_INFO aod
+            JOIN TGALMAETGIL_MICRODUST_INFO microdust
+            ON aod.COURSE_ID = microdust.COURSE_ID AND aod.GUGAN_ID = microdust.GUGAN_ID
+            WHERE aod.msrmt_dt = (
+                SELECT MAX(aod_sub.msrmt_dt)
+                FROM TAOD_GALMAETGIL_INFO aod_sub
+                WHERE aod_sub.COURSE_ID = aod.COURSE_ID
+                AND aod_sub.GUGAN_ID = aod.GUGAN_ID
+                AND aod_sub.msrmt_dt <![CDATA[<=]]> '2024-04-28 12:45:00'
+            )
+              AND microdust.msrmt_dt = (
+                SELECT MAX(microdust_sub.msrmt_dt)
+                FROM TGALMAETGIL_MICRODUST_INFO microdust_sub
+                WHERE microdust_sub.COURSE_ID = microdust.COURSE_ID
+                AND microdust_sub.GUGAN_ID = microdust.GUGAN_ID
+                AND microdust_sub.msrmt_dt <![CDATA[<=]]> '2024-06-25 12:00:00'
+            )
+        )
+        , filtered_tour_info AS (
+            SELECT COURSE_ID
+                 , GUGAN_ID
+                 , GM_TOUR_SEQ
+                 , GEOMETRY
+                 , IMG_FILE_NM
+                 , TITLE
+                 , PLACE
+                 , ITEM_CNTNTS
+                 , ICON_FILE_NM
+            FROM TGALMAETGIL_TOUR_INFO
+        )
+        SELECT t1.COURSE_ID AS courseId
+             , t1.GUGAN_ID AS guganId
+             , t1.GUGAN_NM AS guganNm
+             , t1.COURSE_NM AS courseNm
+             , t1.GM_RANGE AS gmRange
+             , t1.GM_DEGREE AS gmDegree
+             , t1.GM_COURSE AS gmCourse
+             , t1.LK_NM AS lkNm
+             , t1.LK_IMG_PATH AS lkImgPath
+             , t1.REQ_HR                                                AS reqHr
+             , ST_ASTEXT(ST_TRANSFORM(t1.GEOM, 3857))                   AS geom
+             , t2.GM_TOUR_SEQ                                           AS tour_seq
+             , t2.COURSE_ID                                             AS tour_courseId
+             , t2.GUGAN_ID                                              AS tour_guganId
+             , ST_ASTEXT(ST_TRANSFORM(t2.GEOMETRY, 3857))               AS tour_location
+             , t2.IMG_FILE_NM                                           AS tour_imgfilenm
+             , t2.TITLE                                                 AS tour_title
+             , t2.PLACE                                                 AS tour_place
+             , t2.ITEM_CNTNTS                                           AS tour_itemcntnts
+             , t2.ICON_FILE_NM                                          AS tour_iconfilenm
+             , latest.aod                                               AS aod_aod
+             , latest.aod_index                                         AS aod_aodIndex
+             , TO_CHAR(latest.aod_msrmt_dt, 'YYYY-MM-DD HH24:MI')       AS aod_msrmtdt
+             , TO_CHAR(latest.microdust_msrmt_dt, 'YYYY-MM-DD HH24:MI') AS dust_msrmtdt
+             , t6.LIFE_PATTERN_NM                                       AS lpi_lifepatternnm
+             , t6.ENG_LIFE_PATTERN_NM                                   AS lpi_englifepatternnm
+             , t6.LPI_IMG_FILE_NM                                       AS lpi_lifepatternfilenm
+             , t6.LPI_TYPE                                              AS lpi_lpiType
+        FROM TGALMAETGIL_INFO t1
+                 LEFT JOIN filtered_tour_info t2 ON t1.COURSE_ID = t2.COURSE_ID AND t1.GUGAN_ID = t2.GUGAN_ID
+                 JOIN latest_measurements latest
+                      ON t1.COURSE_ID = latest.COURSE_ID AND t1.GUGAN_ID = latest.GUGAN_ID
+                 LEFT JOIN TGALMAETGIL_LIFE_PATTERN_INDEX t5
+                           ON latest.COURSE_ID = t5.COURSE_ID AND latest.GUGAN_ID = t5.GUGAN_ID AND
+                              latest.COURSE_NUM = t5.COURSE_NUM
+                 LEFT JOIN CD_LIFE_PATTERN_INDEX t6
+                           ON t5.LPI_ID = t6.LPI_ID
+    </select>
+
+    <select id="selectRegionAodDataList" resultMap="RegionAodGeoStructureMap">
+        SELECT ST_ASTEXT(ST_TRANSFORM(t1.geom, 3857)) AS geom
+             , t1.ADMDST_NM                           AS admdstName
+             , t2.AOD                                 AS aod
+             , t2.AOD_INDEX                           AS aodIndex
+             , t2.MSRMT_DT                            AS msrmtdt
+        FROM TSGG t1
+        JOIN TAOD_MICRODUST_INFO t2
+        ON t1.SGG_ID = t2.SGG_ID
+        WHERE t2.MSRMT_DT = (SELECT MAX(aod_sub.msrmt_dt)
+                             FROM TAOD_MICRODUST_INFO aod_sub
+                             WHERE aod_sub.msrmt_dt <![CDATA[<=]]> '2024-04-28 12:45:00')
+    </select>
+
+    <select id="selectPortSliderInfo" resultMap="PortSliderGeoStructureMap">
+        SELECT t1.PORT_MSRSTN_ID AS msrstnId
+             ,t1.MSRSTN_CD as msrstnCd
+             ,t1.MSRSTN_NM as msrstnNm
+             ,t2.MSRMT_DT as msrmtDt
+             ,t4.ENG_LIFE_PATTERN_NM AS engLifePatternName
+             ,ST_AsText(ST_Transform(t1."location", 3857)) as geom
+        FROM TPORT_MSRSTN as t1
+        JOIN TPORT_MICRODUST_INFO AS t2
+        ON t1.PORT_MSRSTN_ID = t2.PORT_MSRSTN_ID
+        JOIN TPORT_LIFE_PATTERN_INDEX AS t3
+        ON t2.PORT_MSRSTN_ID = t3.PORT_MSRSTN_ID AND t2.PORT_MSRSTN_NUM=t3.PORT_MSRSTN_NUM
+        JOIN CD_LIFE_PATTERN_INDEX t4
+        ON t3.LPI_ID=t4.LPI_ID
+        WHERE t2.msrmt_dt BETWEEN '2024-07-22 00:00' AND '2024-07-22 23:00'
+        AND t4.LPI_TYPE='미세먼지'
+    </select>
+</mapper>

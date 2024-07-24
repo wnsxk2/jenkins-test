@@ -1,0 +1,355 @@
+@font-face {
+    font-family: 'Gong_Gothic_Medium';
+    src: url("../../fonts/Gong_Gothic_Medium.woff2") format("woff2");
+}
+* {
+    font-family: Gong_Gothic_Medium;
+}
+
+*,
+*:before,
+*:after {
+    position: relative;
+    box-sizing: border-box;
+}
+
+main {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+body,
+div,
+span,
+header,
+main,
+section,
+footer,
+nav,
+img,
+form,
+figcaption,
+figure,
+i,
+p {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 100%;
+    margin: 0;
+}
+
+ul,
+ol,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-use-select: none;
+    user-select: none;
+}
+
+/* 변수 선언 */
+:root {
+    --side-section-width: 630px;
+    --side-section-height: 90vh;
+
+    --side-section-radius: 20px;
+}
+/* 변수 선언 끝 */
+
+/* floating menu 클래스 */
+.float-menu {
+    position: absolute;
+    width: 80px;
+    height: 200px;
+    top: 250px;
+    right: 50px;
+    background-color: #ffffff;
+    color: #ffffFF;
+    border: 1px white solid;
+    border-radius: 10px;
+    box-shadow: #8d8787 5px 5px 5px;
+}
+/* floating menu 클래스 끝 */
+
+/* catch-section 클래스 */
+.catch-section{
+    height: 28vw;
+}
+/* catch-section 클래스 끝 */
+
+/* content section 클래스 */
+.content-section {
+    /*부모 구역의 길이*/
+    --scroll-length: 1;
+    height: calc( var(--scroll-length) * 100vh );
+    width: 100%;
+}
+/* content section 클래스 끝 */
+
+/* figure 클래스 */
+.figure {
+    --scale: calc(0.8 + (0.2 * var(--scroll-length) * var(--visible-y)));
+    top: 0;
+    left: 0;
+    margin: 0;
+    background-color: #ffffff;
+    width: 100%;
+    height: 100vh;
+    display: block;
+    position: sticky;
+    overflow: hidden;
+    will-change: transform;
+    transform: scale(var(--scale));
+    border-radius: 30px;
+    box-shadow: #8d8787 5px 5px 5px;
+}
+/* figure 클래스 끝 */
+
+/* title section 클래스 */
+.title-section {
+    display: flex;
+    height: 5em;
+    padding: 20px 36px;
+}
+
+.title-section > h1 {
+    margin-left: 16px;
+}
+/* title section 클래스 끝 */
+
+/* map section 클래스 */
+.map-section {
+    height: 100%; width: 100%;
+}
+/* map section 클래스 끝 */
+
+/* scroll bar 클래스 */
+html::-webkit-scrollbar {
+    display: none;
+}
+
+/* scroll bar 클래스 끝 */
+
+/* theme 클래스 */
+.theme-menu {
+    position: absolute;
+    height: 3.5em;
+    width: var(--theme-menu-width);
+    background: #ffffff;
+    z-index: 999;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.theme-item {
+    display: flex;
+    /* border가 필요한 경우 추가
+    border: 1px solid black;*/
+    padding: 0px 5px;
+}
+
+.theme-item:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #e658a6;
+}
+
+.theme-item > span {
+    align-self: center;
+}
+
+.theme-item.on {
+    background-color: #ffffff;
+    color: #e658a6;
+}
+
+.theme-item > img {
+    height: 40px;
+    width: 40px;
+}
+
+/* theme 클래스 끝 */
+
+/* side section 클래스 */
+.side-section {
+    position: absolute;
+    right: 0;
+    background-color: #ffffff;
+    width: var(--side-section-width);
+    height: var(--side-section-height);   /* 사이드바의 높이를 전체 화면 높이의 90%로 지정 */
+    margin-top: calc((100vh - var(--side-section-height) - 5em) / 2);    /* 사이드바 위와 아래의 마진을 동일하게 지정 */ /* 5em = header 높이 */
+    z-index: 999;
+}
+
+.side-section {
+    border-top-left-radius: var(--side-section-radius);
+    border-bottom-left-radius: var(--side-section-radius);
+    transform: translate(calc(var(--side-section-width) * 1), 0);
+    transition: .5s;
+}
+
+.side-section.on {
+    transform: translate(0, 0);
+}
+
+.side-section-btn {
+    position: absolute;
+    top: 48%;
+    right: 100%;
+    display: none;
+    width: 24px;
+    height: 52px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: white;
+    border: 0.5px solid lightgray;
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.side-section-btn.on {
+    display: inline-block;
+}
+
+.side-section-btn.back {
+    background-image: url(../../images/common/back.webp);
+}
+
+.side-section-btn.next {
+    background-image: url(../../images/common/next.webp);
+}
+
+.side-theme {
+    position: absolute;
+    left: -208px;
+    top: 8px;
+    display: none;
+}
+
+.side-theme.on{
+    display: block;
+}
+
+.side-theme-item {
+    width: 200px;
+    height: 36px;
+    border-radius: 20px;
+    margin-bottom: 8px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-theme-item > img{
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    left: 0;
+    margin-left: 8px;
+}
+
+.side-theme-item > span{
+    margin-left: 12px;
+    font-size: 16px;
+}
+
+.side-theme-item:hover  {
+    cursor: pointer;
+    background: #2f5597;
+    color: white;
+}
+
+.side-theme-item.on  {
+    background: #2f5597;
+    color: white;
+}
+
+.side-section-header {
+    height: 4em;
+    background: lightgray;
+    border-top-left-radius: var(--side-section-radius);
+    padding: 24px;
+}
+
+.side-section-header > h1 {
+    display: inline-block;
+    font-size: 2rem;
+}
+
+.side-section-date {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+/* side content 클래스 끝 */
+
+/*준비중 팝업*/
+.preparing-popup {
+    width: 360px;
+    height: 142px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #00aaff;
+    border-radius: 9px;
+    line-height: 1.6em;
+    display: none;
+    color: #FFFFFF;
+}
+
+.preparing-popup.active {
+    display: block;
+}
+
+.preparing-popup-btn {
+    margin-left: 330px;
+    border: none;
+    background: none;
+    color: #FFFFFF;
+}
+
+.preparing-popup-btn:hover {
+    color: black;
+}
+
+.preparing-popup-content {
+    text-align: center;
+    margin-top: 16px;
+
+}
+/*준비중 팝업 끝*/
+
+/* 반응형 */
+/* 태블릿 */
+@media screen and (max-width:1200px) {
+
+}
+
+/* 모바일 */
+@media screen and (max-width:767px) {
+
+}
+/* 반응형 끝*/

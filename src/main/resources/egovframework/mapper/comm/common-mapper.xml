@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.busan.smartvillage.comm.mapper.CommonMapper">
+
+    <!-- resultMap 선언부-->
+
+    <!-- 쿼리 선언부 ※mapper 순서와 쿼리 순서 맞춰서 작성!! -->
+    <select id="selectWktSggDataList" resultType="AdmdstDataVO" parameterType="String">
+        SELECT t1.ADMDST_CD
+             , t1.ADMDST_NM
+             , t1.ENG_ADMDST_NM
+             , ST_ASTEXT(ST_TRANSFORM(T1.GEOM,3857)) AS geom
+        FROM TCTPV t2
+        JOIN TSGG t1
+        ON t1.CTPV_ID=t2.CTPV_ID
+        WHERE t2.ADMDST_NM=#{nameCode}
+    </select>
+
+    <select id="selectSggList" resultType="AdmdstDataVO">
+        SELECT SGG_ID as id
+            ,ADMDST_NM as admdstNm
+             ,ENG_ADMDST_NM  as engAdmdstNm
+        FROM tsgg
+        WHERE CTPV_ID = 'ADMDST00000021'
+    </select>
+
+    <select id="selectAdmdstList" resultType="AdmdstDataVO">
+        SELECT SGG_ID as id
+             ,ADMDST_NM as admdstNm
+             ,ENG_ADMDST_NM  as engAdmdstNm
+        FROM tsgg
+        WHERE CTPV_ID = 'ADMDST00000021'
+    </select>
+
+</mapper>
