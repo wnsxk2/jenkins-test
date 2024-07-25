@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="307aacf2-1036-4e50-82ed-8206874e35f8" name="변경" comment="240723_jtpark_Target1 반응형 스타일 적용" />
+    <list default="true" id="307aacf2-1036-4e50-82ed-8206874e35f8" name="변경" comment="240723_jtpark_Target1 반응형 스타일 적용">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,6 +25,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -37,7 +42,7 @@
     <option name="skipTests" value="true" />
   </component>
   <component name="ProjectId" id="2hXVN3eiL0k4d1X4PINl0n09dgq" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Remove" />
   </component>
   <component name="ProjectViewState">
@@ -123,24 +128,6 @@
     <configuration>C:\Users\greenblue\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
   </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="D:\Projects\smartvillage_web" />
-          <option name="myCopyRoot" value="D:\Projects\smartvillage_web" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="D:\Projects\smartvillage_web" />
-          <option name="myCopyRoot" value="D:\Projects\smartvillage_web" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="디폴트 작업">
       <changelist id="307aacf2-1036-4e50-82ed-8206874e35f8" name="변경" comment="" />
@@ -165,7 +152,7 @@
       <workItem from="1720498574874" duration="430000" />
       <workItem from="1720499442740" duration="10625000" />
       <workItem from="1720569453987" duration="226269000" />
-      <workItem from="1721808698637" duration="76000" />
+      <workItem from="1721808698637" duration="1210000" />
     </task>
     <task id="LOCAL-00001" summary="240607_jtpark_선택된 Feature 스타일 에러 수정">
       <created>1717768559100</created>
