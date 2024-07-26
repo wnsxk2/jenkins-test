@@ -9,7 +9,7 @@
 </div>
 <ul class="header-menu">
     <li>
-        <a href="">스마트 빌리지</a>
+        <a href="">Jenkins</a>
     </li>
     <li>
         <a href="${ctxPath}/marine-debris.do">부유 쓰레기</a>
