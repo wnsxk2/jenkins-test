@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>kr.go.busan</groupId>
 	<artifactId>SmartVillage</artifactId>
-	<version>0.3.6</version>
+	<version>0.3.7</version>
 	<packaging>war</packaging>
 	<name>SmartVillage</name>
 	<description>SmartVillage</description>
